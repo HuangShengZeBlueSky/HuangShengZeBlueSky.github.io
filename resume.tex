@@ -1,126 +1,68 @@
-\documentclass[11pt,a4paper,UTF8,fontset=fandol]{ctexart}
-\usepackage[margin=17mm,top=15mm,bottom=16mm]{geometry}
-\usepackage{fontspec}
-\usepackage{enumitem,tabularx,titlesec,fancyhdr,lastpage}
+\documentclass[10pt,a4paper,UTF8,fontset=fandol]{ctexart}
+\usepackage[left=15mm,right=15mm,top=12mm,bottom=13mm]{geometry}
+\usepackage{fontspec,enumitem,tabularx,titlesec,fancyhdr,lastpage}
 \usepackage[hidelinks]{hyperref}
-\hypersetup{pdftitle={黄胜泽：技术履历},pdfauthor={黄胜泽}}
+\hypersetup{pdftitle={黄胜泽：技术简历},pdfauthor={黄胜泽}}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{2pt}
-\linespread{1.10}
-\setlist[itemize]{leftmargin=1.35em,itemsep=2pt,topsep=3pt,parsep=0pt,label=\textbullet}
-\titleformat{\section}{\large\bfseries}{}{0pt}{}[\vspace{-5pt}\rule{\linewidth}{0.5pt}]
-\titlespacing*{\section}{0pt}{10pt}{5pt}
-\newcommand{\entry}[3]{\textbf{#1}\hfill #2\\#3\par\vspace{4pt}}
-\newcommand{\project}[2]{\vspace{4pt}\textbf{#1}\par\if\relax\detokenize{#2}\relax\else{\small\itshape #2}\par\fi}
+\setlength{\parskip}{1pt}
+\setlist[itemize]{leftmargin=1.15em,itemsep=1pt,topsep=2pt,parsep=0pt,label=\textbullet}
+\titleformat{\section}{\fontsize{12}{14}\selectfont\bfseries}{}{0pt}{}[\vspace{-5pt}\rule{\linewidth}{0.45pt}]
+\titlespacing*{\section}{0pt}{7pt}{4pt}
+\newcommand{\entry}[3]{\vspace{2pt}\textbf{#1}\enspace {\small #2}\hfill {\small #3}\par}
 \pagestyle{fancy}\fancyhf{}\renewcommand{\headrulewidth}{0pt}
-\fancyfoot[L]{\footnotesize 黄胜泽\enspace |\enspace 技术履历\enspace |\enspace 2026.10}
-\fancyfoot[R]{\footnotesize\thepage\,/\,\pageref{LastPage}}
+\fancyfoot[L]{\footnotesize\href{https://huangshengzebluesky.github.io/}{huangshengzebluesky.github.io}}
+\fancyfoot[R]{\footnotesize\thepage/\pageref{LastPage}}
 \begin{document}
+\fontsize{10.5}{13.7}\selectfont
 \begin{center}
-{\LARGE\bfseries 黄胜泽}\\[5pt]
-{智能体评测与自进化\enspace $\cdot$\enspace 算法研究与工程}\\[4pt]
-{\small 北京\enspace $\cdot$\enspace \href{mailto:1641335545@qq.com}{1641335545@qq.com}\enspace $\cdot$\enspace \href{https://huangshengzebluesky.github.io/}{个人技术网站}\enspace $\cdot$\enspace \href{https://github.com/HuangShengZeBlueSky}{GitHub}}
+{\fontsize{20}{24}\selectfont\bfseries 黄胜泽}\\[3pt]
+{\small 智能体评测与自进化\enspace $\cdot$\enspace 算法研究与工程}\\[3pt]
+{\small 北京\enspace $\cdot$\enspace \href{mailto:1641335545@qq.com}{1641335545@qq.com}\enspace $\cdot$\enspace \href{https://huangshengzebluesky.github.io/}{技术网站}\enspace $\cdot$\enspace \href{https://github.com/HuangShengZeBlueSky}{GitHub}}
 \end{center}
 \vspace{-8pt}
 \section{教育背景}
-\entry{清华大学}{2025.09 -- 2028.06（预计）}{数学与人工智能\enspace 硕士研究生}
-\entry{北京航空航天大学}{2021.09 -- 2025.06}{人工智能\enspace 工学学士\enspace |\enspace 平均绩点：3.72 / 4.0}
-\section{重点实习经历}
-\entry{元理智能}{2026.01 -- 2026.10}{AutoHarness 算法负责实习生\enspace |\enspace 北京}
-% BEGIN INTERNSHIP
-\project{AutoHarness：面向运行组件的自动优化}{}
+\entry{清华大学}{数学与人工智能 · 硕士研究生}{2025.09--2028.06（预计）}
+\entry{北京航空航天大学}{人工智能 · 工学学士，平均绩点 3.72/4.0}{2021.09--2025.06}
+\section{实习经历}
+\entry{元理智能}{AutoHarness 算法负责实习生}{2026.01--2026.10}
 \begin{itemize}
-\item 负责 AutoHarness 算法与修改空间设计，建设轨迹归因、失败聚类、候选生成与分层评测流程；以 Pydantic Agent 明确配置边界，在 DeepSeek Harness 中实现插件化优化。
-\item 在 Telecom 训练集 74 任务$\times$3 次对照中，编码智能体设计的插件组合将成功率由 29.73\% 提升至 60.81\%，增加 31.08 个百分点。
+\item \textbf{AutoHarness 与实验工作台：}负责运行组件的修改面设计，基于 Pydantic Agent 明确配置边界，在 DeepSeek Harness 中实现方法级插件装配；结合监控、归因、优化三会话与交互看板，连接失败分析、候选评测和版本晋升。
+\item \textbf{受控优化结果：}在模型、任务及预算一致的 Telecom 训练集 74 题$\times$3 次对照中，提示词与工具结果插件使成功率由 29.73\% 提升至 60.81\%（增加 31.08 个百分点）；完成全量轨迹与插件实际生效核验。
+\item \textbf{金融 Agent 沙箱迁移：}将 13 个远端业务工具迁移为本地 Python/SQLite 实现，保留调用接口；分离业务、记忆、历史三库，关联模型请求、工具执行和数据库变化，支持状态重置、失败复现与批量实验。
+\item \textbf{三层测评：}分别评估单轮路由、工具与回复一致性，会话策略与协商技巧，以及最终和解结果；将评分理由关联到实际执行轨迹和业务终态，定位“回复合理但操作未完成”等问题。
+\item \textbf{医疗预约 AutoPE：}接入有状态用户模拟器，将体检预约拆为开场、需求探询、价值呈现、预约促成四阶段；实现阶段反馈聚合、策略候选更新与冻结评测，以模拟预约结果指导提示词演化。
 \end{itemize}
-\project{自进化实验工作台与 Skill}{}
+\entry{中车数研院}{智能体实习生}{2025.09--2026.01}
 \begin{itemize}
-\item 建设自进化实验工作台，关联配置、轮次、候选、评测与晋升关系，支持从总体进度追踪到具体案例轨迹。
-\item 沉淀监控、失败归因、优化、看板与结果审查五类 Skill，并在 Tau2 场景组织三会话协作流程。
+\item \textbf{工业知识与智能体：}建设文档识别、向量检索与重排序的 Agentic RAG 链路；参与 OpenAgent 分层路由、多模型部署，以及基于 AutoTimes 的时序异常检测实验。
 \end{itemize}
-\project{垂直 Agent 的三层测评链路}{}
+\entry{中电太极计算机研究所}{自然语言处理研究实习生}{2024.07--2024.09}
 \begin{itemize}
-\item 构建单轮执行、会话策略、业务结果三层测评，覆盖路由、技能、工具使用、协商技巧与最终和解结果。
-\item 将裁判评分和理由关联到案例轨迹及业务状态，支持模型比较、失败诊断与策略候选回归。
+\item \textbf{文档信息抽取：}构建文档识别与大语言模型结合的信息抽取流水线，通过分步推理和规则后处理输出结构化字段。
 \end{itemize}
-\project{金融协商 Agent 的本地实验沙箱}{}
+\section{论文与研究参与}
+\entry{\href{https://arxiv.org/abs/2604.19092}{RoboWM-Bench：机器人操作世界模型评测}}{}{共同作者 · CVPR Workshops 2026}
 \begin{itemize}
-\item 完成金融债务协商场景 13 个业务工具的本地化，使用 Python 与 SQLite 管理隔离实验状态。
-\item 贯通对话、工具调用、结果和数据库变化记录，建设运行、工具、数据与轨迹控制台，支持失败复现和批量实验。
+\item 参与以仿真执行检验生成视频物理可执行性的评测研究；工作获 CVPR 2026 WMAS Workshop 最佳论文奖，入选 State of AI Report 2026 基准综述。
 \end{itemize}
-\project{医疗体检预约中的 AutoPE}{}
+\entry{\href{https://arxiv.org/abs/2610.10120}{RewardWeaver：长周期交互中的自演化奖励适配}}{}{研究参与 · 公开预印本}
 \begin{itemize}
-\item 将 AutoPE 应用于医疗体检预约，搭建用户模拟、业务顾问、过程评估与阶段策略更新链路。
-\item 围绕开场、需求探询、价值呈现、预约促成四阶段组织策略，关联逐轮评分、阶段推进与模拟预约结果。
+\item 参与研究思路提出、算法构建与基础设施建设；围绕低结果轨迹归因定位重复能力瓶颈，动态选择下一阶段强化学习的过程奖励。
 \end{itemize}
-
-% END INTERNSHIP
-\newpage
-\begin{center}{\large\bfseries 黄胜泽}\hfill{科研、论文与技术项目}\end{center}
-\vspace{-9pt}
-\section{研究参与与技术项目}
-% BEGIN RESEARCH
-\project{RoboWM-Bench}{共同作者 · 参与研究}
+\section{研究工程与个人项目}
 \begin{itemize}
-\item 共同作者参与 RoboWM-Bench，研究将生成操作视频转为机器人动作并通过执行评估世界模型的具身可执行性。
-\item 工作发表于 CVPR 2026 Workshops，获 WMAS Workshop 最佳论文奖，入选 State of AI Report 2026 基准综述。
+\item \textbf{\href{https://huangshengzebluesky.github.io/projects/multi-agent-benchmark.html}{大语言模型多智能体 Benchmark}：}设计 MPE 与 Google Research Football 的模型--环境接口，覆盖九种 MPE 环境，支持语义观测、结构化动作、批量评测及决策轨迹回放，并发布技术网站。
 \end{itemize}
-\project{RewardWeaver：自演化奖励适配}{研究参与 · 想法提出、算法构建与基础设施}
 \begin{itemize}
-\item 参与 RewardWeaver 长周期交互强化学习研究的想法提出、算法构建与基础设施建设。
-\item 围绕终局结果驱动的失败归因、能力瓶颈定位与过程奖励适配，探索随策略演化调整训练重点的自动闭环。
+\item \textbf{\href{https://huangshengzebluesky.github.io/projects/flyreview.html}{飞跃会与自主科研工作流}：}以多人文档评论驱动调研、规划、实验、运行和评审；实现章节级反馈归组与阶段路由、产物快照、人工审阅暂停及结果同步。
 \end{itemize}
-\project{大语言模型多智能体 Benchmark}{项目设计与开发}
 \begin{itemize}
-\item 设计 MPE 与 Google Research Football 的统一模型--环境接口，支持语义观测、结构化动作和开源模型及云端服务接入。
-\item 覆盖九种 MPE 环境，建设批量评测、决策轨迹、奖励统计和视频回放，配套发布技术文档网站。
+\item \textbf{\href{https://huangshengzebluesky.github.io/projects/educate-flywheel.html}{EducateFlywheel 计算机教育飞轮}：}建设知识整理、生成、多路求解、审题及反馈改题链路，形成五章 500 道试用候选题与 4 套操作系统专项卷，保留题目来源及修订关系。
 \end{itemize}
-\project{AutoPE：多智能体仿真驱动的提示词演化}{方法设计与工程实现}
 \begin{itemize}
-\item 构建 Buyer、Seller、Judge 与 Optimizer 协作的提示词演化框架，连接用户仿真、过程评估与阶段策略更新。
-\item 支持冻结评测、内部优化器与外部编码智能体迭代，保留策略版本及对话产物，支撑候选比较和回归分析。
-\end{itemize}
-\project{飞跃会：多人协作驱动的自主科研}{系统设计与开发}
-\begin{itemize}
-\item 构建飞书文档与多人评论驱动的自主科研工作流，串联调研、规划、实验实现、运行和评审。
-\item 实现评论采集、章节级反馈归组与路由、阶段快照、人工审阅暂停及结果同步，支持研究者持续介入 AI 迭代。
-\end{itemize}
-
-% END RESEARCH
-\vspace{6pt}
-{\small 公开研究：\href{https://arxiv.org/abs/2604.19092}{RoboWM-Bench}\enspace |\enspace \href{https://www.stateof.ai/State-of-AI-Report-2026.pdf#page=36}{State of AI Report 2026}\enspace |\enspace \href{https://arxiv.org/abs/2610.10120}{RewardWeaver}}
-\newpage
-\begin{center}{\large\bfseries 黄胜泽}\hfill{人工智能提效工具与工程积累}\end{center}
-\vspace{-9pt}
-\section{人工智能提效工具}
-% BEGIN TOOLS
-\project{EducateFlywheel：计算机教育飞轮}{}
-\begin{itemize}
-\item 构建操作系统教育飞轮，串联知识整理、题目生成、多路独立求解、审题及反馈改题。
-\item 形成五章 500 道试用候选题、4 套专项模拟卷与本地演示产品，提供题目溯源、版本修订和规则驱动的练习推荐。
-\end{itemize}
-\project{回声：把人的输入绑定到专注的事}{}
-\begin{itemize}
-\item 开发以原始输入和工作主线为中心的本地工具，将跨项目 Codex 会话与当前专注事项持续绑定。
-\item 实现授权会话采集、专注回看与复盘，通过 SQLite 和 11 个 MCP 工具提供记录查询、计划读取及摘要保存。
-\end{itemize}
-
-% END TOOLS
-\section{其他实习经历}
-\entry{中车数研院}{2025.09 -- 2026.01}{智能体实习生\enspace |\enspace 北京}
-\begin{itemize}
-\item 推进工业知识库的 Agentic RAG 链路，整合文档识别、对话、向量表示与重排序，结合 Qwen2.5-VL、实体焦点抽取和混合检索，支持工业文档问答。
-\item 参与 OpenAgent 工业智能体与 OpenLTM 时序检测系统，实现系统提示分层路由、Xinference 多模型部署及基于 AutoTimes 的时序异常检测实验。
-\end{itemize}
-\vspace{4pt}
-\entry{中电太极计算机研究所}{2024.07 -- 2024.09}{自然语言处理研究实习生\enspace |\enspace 北京}
-\begin{itemize}
-\item 构建文档识别与大语言模型结合的信息抽取流水线，使用开源模型、分步推理和规则后处理，支持 PDF 关键信息结构化抽取。
+\item \textbf{\href{https://huangshengzebluesky.github.io/projects/echo.html}{回声：人的输入与专注会话}：}开发以原始输入为核心的本地工作台，支持跨项目 Codex 会话绑定工作主线、专注回看与复盘，通过 SQLite 和 11 个 MCP 工具连接同一份档案。
 \end{itemize}
 \section{专业技能}
-\begin{tabularx}{\linewidth}{@{}l X@{}}
-\textbf{编程与工程} & Python、C/C++、SQL、TypeScript、React、Vite、Linux、Git、Docker。\\[5pt]
-\textbf{模型与系统} & PyTorch、Hugging Face、vLLM、Xinference、Pydantic、DeepSeek Harness、FastAPI、SQLite、Neo4j。\\[5pt]
-\textbf{研究与实践} & 大语言模型智能体、提示词演化、多智能体系统、强化学习、检索增强生成、基准设计、失败归因、实验工作流。\\
-\end{tabularx}
+\textbf{开发与系统：}Python、SQL、TypeScript、PyTorch、Pydantic Agent、DeepSeek Harness、FastAPI、SQLite、Docker、Git。\par
+\textbf{研究与实践：}智能体评测、失败归因、提示词演化、多智能体系统、强化学习、检索增强生成、实验工作流。\par
 \end{document}
