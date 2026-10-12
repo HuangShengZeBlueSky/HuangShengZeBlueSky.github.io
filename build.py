@@ -1,130 +1,130 @@
-"""Build the public portfolio with Python's standard library."""
-import json, shutil
-import re
+"""Build the maintained research portfolio from structured, reviewable content."""
+import json, re, shutil, math
 from html import escape as e
 from pathlib import Path
-ROOT=Path(__file__).parent
-OUT=ROOT/'dist'
-data=json.loads((ROOT/'content.json').read_text())
-projects=data['projects']
-byid={p['id']:p for p in projects}
-OUT.mkdir(exist_ok=True)
-(OUT/'projects').mkdir(exist_ok=True)
-shutil.copytree(ROOT/'assets',OUT/'assets',dirs_exist_ok=True)
-(OUT/'.nojekyll').write_text('')
-SITE='https://huangshengzebluesky.github.io'
-
+ROOT=Path(__file__).parent;OUT=ROOT/'dist';SITE='https://huangshengzebluesky.github.io'
+data=json.loads((ROOT/'content.json').read_text());projects=data['projects'];byid={p['id']:p for p in projects}
+presentation=json.loads((ROOT/'presentation.json').read_text())
+OUT.mkdir(exist_ok=True);(OUT/'projects').mkdir(exist_ok=True)
+shutil.copytree(ROOT/'assets',OUT/'assets',dirs_exist_ok=True);(OUT/'.nojekyll').write_text('')
 def link(url,label,cls=''):
-    return f'<a href="{e(url)}"'+(f' class="{cls}"' if cls else '')+(' target="_blank" rel="noopener noreferrer"' if url.startswith('http') else '')+f'>{e(label)}</a>'
-def project_url(p,prefix=''):
-    return prefix+'projects/'+p['id']+'.html'
+ return f'<a href="{e(url)}" class="{cls}"'+(' target="_blank" rel="noopener noreferrer"' if url.startswith('http') else '')+f'>{e(label)}</a>'
 def inline(text):
-    pattern=r'\[([^\]]+)\]\((https?://[^\s)]+)\)'
-    out='';pos=0
-    for match in re.finditer(pattern,text):
-        out+=e(text[pos:match.start()])+link(match[2],match[1]);pos=match.end()
-    return out+e(text[pos:])
-def tags(p):
-    return '<div class="tags">'+''.join(f'<span class="tag">{e(t)}</span>' for t in p['tags'])+'</div>'
-def doc(title,body,prefix='',desc='黄胜泽的技术履历：Agent 评测、自进化与算法工程。',path=''):
-    return f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)} · 黄胜泽</title><meta name="description" content="{e(desc)}"><meta name="theme-color" content="#f7f5ef"><link rel="canonical" href="{SITE}/{path}"><meta property="og:title" content="{e(title)} · 黄胜泽"><meta property="og:description" content="{e(desc)}"><meta property="og:type" content="website"><link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="{prefix}assets/style.css"></head><body><header class="topbar"><nav class="shell nav" aria-label="主导航"><a class="brand" href="{prefix}index.html">黄胜泽 <small>SHENGZE HUANG</small></a><div class="nav-links"><a href="{prefix}index.html#engineering">工程</a><a href="{prefix}index.html#research">研究</a><a class="hide-mobile" href="{prefix}learn.html">学习路径</a><a class="button" href="{prefix}resume.html">技术履历 ↗</a></div></nav></header>{body}<footer class="shell footer"><span>黄胜泽 · Agent Systems &amp; Self-Evolution</span><span>更新于 2026.10 · {link('https://github.com/HuangShengZeBlueSky/HuangShengZeBlueSky.github.io','网站源码')} · {link('mailto:1641335545@qq.com','联系我')}</span></footer><script src="{prefix}assets/site.js" defer></script></body></html>'''
-
-def row(p,i):
-    return f'''<a class="project-row" href="{project_url(p)}"><span class="project-no">{i:02d}</span><div><h3>{e(p['title'])}</h3><p>{e(p['summary'])}</p>{tags(p)}</div><span class="arrow" aria-hidden="true">↗</span></a>'''
-def card(p):
-    links=link(project_url(p),'阅读技术说明 ↗')
-    if p['links']: links+=link(p['links'][0]['url'],p['links'][0]['label'])
-    return f'''<article class="research-card"><div class="card-kicker">{e(p['kicker'])}</div><h3>{link(project_url(p),p['title'])}</h3><p>{e(p['summary'])}</p><div class="card-links">{links}</div></article>'''
-def section_head(index,title,sub):
-    return f'<div class="section-header"><span class="section-index">{index}</span><div><h2>{title}</h2><p class="section-sub">{sub}</p></div></div>'
-
-internships=[p for p in projects if p['category']=='internship']
-research=[byid[k] for k in ['robowm-bench','rewardweaver','multi-agent-benchmark','autope','flyreview']]
-tools=[p for p in projects if p['category']=='tool']
-body='''<main class="shell"><section class="hero"><div><p class="eyebrow">Research Notes / Engineering Portfolio</p><h1>让智能体从执行任务，<br>走向<em>持续进化。</em></h1><p class="intro">我关注大语言模型智能体的评测、反馈与自进化：从真实业务中的一次失败出发，找到可修改的能力与组件，再用可重复的实验检验改进。</p><p class="identity">黄胜泽 · 清华大学数学与人工智能硕士研究生<span>元理智能 · AutoHarness 算法负责实习生 · 2026.01—2026.10</span></p><div class="linkline"><a href="#engineering">阅读工程专题 ↓</a><a href="https://github.com/HuangShengZeBlueSky" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="mailto:1641335545@qq.com">Email ↗</a></div></div><figure class="research-figure" aria-label="评测、归因、优化及复验构成智能体持续改进闭环"><div class="figure-label"><span>THE IMPROVEMENT LOOP</span><span>FIG. 01</span></div><div class="loop-item"><span class="loop-number">01</span><div class="loop-text"><strong>评测 · 看见真实行为</strong><span>业务环境 / 完整轨迹 / 多层指标</span></div></div><div class="loop-item"><span class="loop-number">02</span><div class="loop-text"><strong>归因 · 定位能力瓶颈</strong><span>失败分析 / 机制聚类 / 修改面选择</span></div></div><div class="loop-item"><span class="loop-number">03</span><div class="loop-text"><strong>优化 · 交付可运行的改进</strong><span>提示词 / Harness 插件 / 训练奖励</span></div></div><figcaption class="figure-note">↳ 回到相同任务与指标，验证下一轮改进。</figcaption></figure></section><div class="ribbon"><div><small>RESEARCH</small><b>RoboWM-Bench · CVPR Workshops 2026</b></div><div><small>RECOGNITION</small><b>State of AI Report 2026 收录</b></div><div><small>ENGINEERING</small><b>Agent 评测 · AutoHarness · 自进化</b></div></div>'''
-body+='<aside class="learning-banner"><div><span class="eyebrow">TECHNICAL FIELD NOTES</span><p>从完整链路到关键设计：工程机制、论文精读与修改面地图。</p></div><a href="learn.html">选择一条学习路径 ↗</a></aside>'
-body+='<section id="engineering" class="section">'+section_head('01 / ENGINEERING','从业务现场到自进化系统','元理智能实习专题。将环境、测评、优化与持续实验组织成一条完整的工程链路。')+'<div class="section-body">'
-body+='''<div class="feature-head"><h3>元理智能</h3><div class="meta">AutoHarness 算法负责实习生<br>2026.01—2026.10 · 北京</div></div><p class="feature-lead">从医疗体检预约的提示词演化，到金融债务协商的沙箱和测评，再扩展到可修改运行组件的 AutoHarness。关注的不只是一次对话能否成功，也包括失败能否被复现、解释，并转化为可交付的系统改进。</p><div class="pipeline" aria-label="业务智能体研发链路"><div>业务场景<small>医疗 / 金融</small></div><div>实验环境<small>本地沙箱</small></div><div>分层测评<small>单轮 / 会话 / 结果</small></div><div>优化闭环<small>归因 / 候选 / 复验</small></div><div>持续运行<small>看板 / Skill</small></div></div>'''
-body+=''.join(row(p,i+1) for i,p in enumerate(internships))
-body+='''<div class="result-note"><b>29.73% → 60.81%</b> · DSH 插件受控实验中的任务成功率<small>Telecom 训练集 74 个任务，每任务 3 次，共 222 次评测；提示词与工具结果插件组合带来 31.08 个百分点提升。此处为训练集实验，未宣称留出测试或真实业务收益。</small></div></div></section>'''
-body+='<section id="research" class="section">'+section_head('02 / RESEARCH','研究参与与技术项目','评测让问题可见，反馈决定下一步优化什么。保留与这条主线直接相关的论文和项目。')+'<div class="section-body research-grid">'+''.join(card(p) for p in research)+'</div></section>'
-body+='<section id="tools" class="section">'+section_head('03 / TOOLS','把同一思路，带回人的工作','一端是持续改进的教育内容，一端是持续保存的工作意图。')+'<div class="section-body tool-grid">'
-for i,p in enumerate(tools):
-    flow='知识 → 出题 → 多路求解 → 审核 → 学习反馈 → 修订' if i==0 else '人的原始输入 → 工作主线 → 专注会话 → 回看与复盘'
-    body+=f'<article class="tool-card"><div class="card-kicker">{e(p["kicker"])}</div><h3>{e(p["title"])}</h3><p>{e(p["summary"])}</p><div class="card-links">{link(project_url(p),"阅读产品与技术说明 ↗")}</div><div class="mini-flow">{flow}</div></article>'
-body+='</div></section>'
-body+='<section id="background" class="section">'+section_head('04 / BACKGROUND','教育与早期经历','从人工智能研究到工业知识与业务系统，持续积累模型、数据和工程之间的连接能力。')+'<div class="section-body"><div class="timeline">'
-for date,title,desc in [
-('2025.09—2028.06','清华大学 · 硕士研究生','数学与人工智能 · 预计 2028 年 6 月毕业'),
-('2021.09—2025.06','北京航空航天大学 · 工学学士','人工智能 · 平均绩点 3.72 / 4.0'),
-('2025.09—2026.01','中车数研院 · 智能体实习生','工业知识库与 Agentic RAG、多模型部署、工业智能体和时序异常检测。'),
-('2024.07—2024.09','中电太极计算机研究所 · 自然语言处理研究实习生','光学字符识别与大语言模型结合的文档信息抽取流水线。')]:
-    body+=f'<div class="timeline-row"><span class="timeline-time">{date}</span><div><h3>{title}</h3><p>{desc}</p></div></div>'
-body+='''</div><p class="skills"><b>技术方向</b>　智能体评测、提示词演化、强化学习、自动科研、实验基础设施<br><b>工程栈</b>　Python、SQL、TypeScript、PyTorch、Pydantic、FastAPI、SQLite、Docker、Git</p><div class="linkline"><a href="resume.html">查看技术履历 ↗</a><a href="learn.html">进入技术专题学习路径 ↗</a></div></div></section></main>'''
-(OUT/'index.html').write_text(doc('智能体评测与自进化',body),encoding='utf-8')
-
+ out='';pos=0
+ for m in re.finditer(r'\[([^\]]+)\]\((https?://[^\s)]+)\)',text):out+=e(text[pos:m.start()])+link(m[2],m[1]);pos=m.end()
+ return out+e(text[pos:])
+def project_url(p,prefix=''):return prefix+'projects/'+p['id']+'.html'
+def tags(p):return '<div class="tags">'+''.join('<span>'+e(t)+'</span>' for t in p['tags'])+'</div>'
+def doc(title,body,prefix='',desc='黄胜泽的研究与工程：智能体评测、自进化与人机协作。',path=''):
+ return f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)} · 黄胜泽</title><meta name="description" content="{e(desc)}"><meta name="theme-color" content="#f7f6f2"><link rel="canonical" href="{SITE}/{path}"><meta property="og:title" content="{e(title)} · 黄胜泽"><meta property="og:description" content="{e(desc)}"><meta property="og:type" content="website"><link rel="icon" href="{prefix}assets/favicon.svg"><link rel="stylesheet" href="{prefix}assets/style.css"></head><body><a class="skip" href="#main">跳到正文</a><header class="topbar"><nav class="shell nav" aria-label="主导航"><a class="brand" href="{prefix}index.html"><span class="monogram">H.</span><span>黄胜泽<small>SHENGZE HUANG</small></span></a><div class="nav-links"><a href="{prefix}index.html#selected">代表作</a><a href="{prefix}learn.html">专题索引</a><a class="hide-mobile" href="{prefix}index.html#about">关于</a><a class="nav-resume" href="{prefix}resume.html">简历 <span>↗</span></a></div></nav></header>{body}<footer class="shell footer"><div><strong>持续实验，持续理解。</strong><p>黄胜泽 · 智能体评测与自进化</p></div><div><a href="mailto:1641335545@qq.com">Email ↗</a><a href="https://github.com/HuangShengZeBlueSky">GitHub ↗</a><a href="{prefix}resume.pdf">简历 PDF ↓</a><small>更新于 2026.10 · <a href="https://github.com/HuangShengZeBlueSky/HuangShengZeBlueSky.github.io">网站源码</a></small></div></footer><script src="{prefix}assets/site.js" defer></script></body></html>'''
+def node(x,y,w,h,title,sub='',active=False):
+ return f'<g><rect x="{x}" y="{y}" width="{w}" height="{h}" rx="5" class="node {"node-active" if active else ""}"/><text x="{x+w/2}" y="{y+h/2-(7 if sub else -5)}" text-anchor="middle" class="node-title {"light" if active else ""}">{e(title)}</text>'+(f'<text x="{x+w/2}" y="{y+h/2+17}" text-anchor="middle" class="node-sub {"light" if active else ""}">{e(sub)}</text>' if sub else '')+'</g>'
+def edge(path,id):return f'<path d="{path}" class="edge" marker-end="url(#{id})"/>'
+def diagram(key,compact=False):
+ v=presentation[key];kind=v['kind'];aid='arrow-'+key+('-small' if compact else '')
+ s=f'<svg class="architecture" viewBox="0 0 800 370" role="img" aria-label="{e(v["short"])}机制图"><defs><marker id="{aid}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="30" y="29" class="svg-label">SYSTEM / {e(key.upper())}</text>'
+ if kind=='grid':
+  for i,t in enumerate(['描述','校验','结果处理','技能','记忆']):s+=f'<text x="{215+i*116}" y="85" text-anchor="middle" class="node-sub">{t}</text>'
+  for row,t in enumerate(['智能体','业务工具','会话状态']):
+   s+=f'<text x="100" y="{137+row*75}" text-anchor="middle" class="node-title">{t}</text>'
+   for col in range(5):
+    active=(row,col) in [(0,0),(1,1),(1,2),(2,4)]
+    s+=node(164+col*116,105+row*75,102,55,'方法' if active else '·','',active)
+  s+='<text x="400" y="350" text-anchor="middle" class="node-sub">对象 × 修改面 → 方法选择 → 可执行插件组合</text>'
+ elif kind=='layers':
+  for i,(a,b) in enumerate([('01 单轮执行','路由 · 工具调用 · 回复一致性'),('02 会话策略','技巧 · 节奏 · 多轮一致性'),('03 业务终态','和解 · 提交 · 签约')]):s+=node(80,60+i*93,640,73,a,b,i==2)
+ elif kind=='lanes':
+  s+=edge('M 130 122 V 157',aid)+edge('M 380 215 V 256',aid)+edge('M 380 235 H 503 V 250',aid)+edge('M 248 187 H 295',aid)+edge('M 465 187 H 520',aid)+edge('M 610 218 V 256',aid)
+  s+=node(45,60,210,60,'智能体 / 技能路由','保持原有调用方式')+node(45,157,205,60,'13 个本地业务工具','Python · 参数模型',True)+node(295,157,170,60,'状态转换','预览 / 提交 / 合同')+node(520,157,230,60,'轨迹记录','模型 · 工具 · 状态差异')
+  s+=node(270,256,142,60,'业务库','业务事实')+node(432,256,142,60,'记忆库','会话状态')+node(594,256,142,60,'历史库','保留记录')
+  s+='<text x="500" y="94" text-anchor="middle" class="node-sub">可重置的业务状态，可追溯的运行历史</text>'
+ elif kind=='branch':
+  a,b=('人手操作视频','机器人操作视频') if key=='robowm-bench' else ('MPE 环境','Football 环境')
+  middle,sub=('动作恢复','重定向 / 逆动力学') if key=='robowm-bench' else ('模型—环境接口','语义观测 / 结构化动作')
+  s+=edge('M 222 115 H 260 V 182 H 292',aid)+edge('M 222 250 H 260 V 182',aid)+edge('M 508 182 H 555',aid)+edge('M 660 217 V 269',aid)
+  s+=node(32,80,190,70,a)+node(32,215,190,70,b)+node(292,146,216,72,middle,sub,True)+node(555,146,210,72,'环境执行','动作、接触与任务状态')+node(555,269,210,65,'结果与轨迹','成功判定 / 过程解释')
+ elif kind=='binding':
+  for i,t in enumerate(['一句原始想法','项目中的问题','后续补充输入']):s+=node(35,67+i*90,175,55,t)+edge(f'M 210 {95+i*90} H 255 V 185 H 294',aid)
+  s+=node(294,148,205,76,'工作主线','正在专注的那件事',True)+edge('M 499 185 H 559',aid)+node(559,148,205,76,'专注会话','持续接收相关输入')+edge('M 661 224 V 282 H 500',aid)+node(293,267,207,60,'回看与复盘','原文 + 回答 + 摘要版本')
+ elif kind=='lineage':
+  s+=node(45,145,165,66,'固定父版本','条件与完整配置')+edge('M 210 178 H 260 V 105 H 295',aid)+edge('M 260 178 V 256 H 295',aid)
+  s+=node(295,73,185,65,'候选 A','假设与修改')+node(295,224,185,65,'候选 B','独立对照')+edge('M 480 105 H 520 V 178 H 580',aid)+edge('M 480 256 H 520 V 178',aid)+node(580,145,175,66,'评测与决定','晋升 / 保留父版',True)
+  s+='<text x="400" y="340" text-anchor="middle" class="node-sub">产物交接 · 版本关系 · 逐案例比较</text>'
+ else:
+  titles=[x['title'] for x in v['steps']];coords=[(55,65),(500,65),(500,230),(55,230)]
+  for path in ['M 290 103 H 494','M 617 141 V 224','M 500 268 H 296','M 172 230 V 147']:s+=edge(path,aid)
+  for i,(x,y) in enumerate(coords):s+=node(x,y,235,76,f'0{i+1} {titles[i]}','',i==2)
+  s+='<text x="395" y="189" text-anchor="middle" class="cycle-center">反馈 → 下一轮</text>'
+ return s+'</svg>'
+def explorer(p):
+ v=presentation[p['id']];s=f'<figure class="method-figure"><div class="figure-top"><span>机制图解</span><span>点击步骤，阅读具体含义 ↓</span></div><div class="diagram-scroll">{diagram(p["id"])}</div><div class="step-explorer"><div class="step-buttons" role="group" aria-label="选择机制步骤">'
+ for i,x in enumerate(v['steps']):s+=f'<button data-step="{i}" aria-pressed="{str(i==0).lower()}"><span>0{i+1}</span>{e(x["title"])}</button>'
+ s+='</div>'
+ for i,x in enumerate(v['steps']):s+=f'<div class="step-detail" data-panel="{i}"'+(' hidden' if i else '')+f'><strong>{e(x["title"])}</strong><p>{e(x["body"])}</p></div>'
+ return s+'</div><figcaption>依据项目机制重绘的解释图；不代表实时运行界面。</figcaption></figure>'
+def catalog_item(p,i):
+ v=presentation[p['id']];category={'internship':'engineering','research':'research','tool':'tools'}.get(p['category'],'research')
+ if p['id'] in ['multi-agent-benchmark','autope','flyreview']:category='research'
+ return f'<a class="catalog-item" data-category="{category}" data-search="{e(p["title"]+" "+p["summary"])}" href="projects/{p["id"]}.html"><span class="item-index">{i:02d}</span><div><span class="item-label">{e(p["kicker"])}</span><h3>{e(v["short"])}</h3><p>{e(v["question"])}</p></div><span class="item-arrow">↗</span></a>'
 def render_section(section):
-    text=''.join(f'<p>{inline(t)}</p>' for t in section.get('paragraphs',[]))
-    if section.get('flow'):
-        text+='<div class="technical-flow" aria-label="方法流程">'+''.join(f'<div><span>{i+1:02d}</span><strong>{e(x["title"])}</strong><p>{e(x["body"])}</p></div>' for i,x in enumerate(section['flow']))+'</div>'
-    if section.get('formula'):
-        text+=f'<div class="formula" aria-label="方法表达式">{e(section["formula"])}</div>'
-    if section.get('table'):
-        t=section['table']
-        text+='<div class="table-scroll"><table><thead><tr>'+''.join(f'<th>{e(str(x))}</th>' for x in t['headers'])+'</tr></thead><tbody>'
-        text+=''.join('<tr>'+''.join(f'<td>{e(str(x))}</td>' for x in row)+'</tr>' for row in t['rows'])+'</tbody></table></div>'
-    if section.get('bullets'): text+='<ul>'+''.join(f'<li>{inline(t)}</li>' for t in section['bullets'])+'</ul>'
-    return text
-
-related={
-'medical-autope':['autope','evaluation','finance-sandbox'],
-'finance-sandbox':['evaluation','autoharness'],
-'evaluation':['finance-sandbox','rewardweaver','autoharness'],
-'autoharness':['workbench','autope','rewardweaver'],
-'workbench':['autoharness','flyreview'],
-'robowm-bench':['multi-agent-benchmark','evaluation'],
-'rewardweaver':['evaluation','autope','autoharness'],
-'autope':['medical-autope','autoharness','rewardweaver'],
-'flyreview':['workbench','educate-flywheel','echo'],
-'educate-flywheel':['flyreview','evaluation'],
-'echo':['workbench','flyreview'],
-'multi-agent-benchmark':['robowm-bench','evaluation']}
-
+ s=''.join(f'<p>{inline(t)}</p>' for t in section.get('paragraphs',[]))
+ if section.get('flow'):s+='<ol class="technical-flow">'+''.join(f'<li><span>{i+1:02d}</span><strong>{e(x["title"])}</strong><p>{e(x["body"])}</p></li>' for i,x in enumerate(section['flow']))+'</ol>'
+ if section.get('formula'):s+=f'<div class="formula">{e(section["formula"])}</div>'
+ if section.get('table'):
+  t=section['table'];s+='<div class="table-scroll" role="region" aria-label="数据与设计对照" tabindex="0"><table><thead><tr>'+''.join('<th>'+e(str(x))+'</th>' for x in t['headers'])+'</tr></thead><tbody>'+''.join('<tr>'+''.join('<td>'+e(str(x))+'</td>' for x in r)+'</tr>' for r in t['rows'])+'</tbody></table></div>'
+ if section.get('bullets'):s+='<ul>'+''.join('<li>'+inline(t)+'</li>' for t in section['bullets'])+'</ul>'
+ if section.get('code'):
+  code=section['code'];s+='<div class="code-block"><div>'+e(code['language'])+'</div><pre><code>'+e(code['text'])+'</code></pre></div>'
+ if section.get('callout'):
+  x=section['callout'];s+='<aside class="callout"><strong>'+e(x['label'])+'</strong><p>'+inline(x['text'])+'</p></aside>'
+ return s
+# Homepage
+body='''<main id="main"><section class="shell hero"><div class="hero-copy"><p class="eyebrow"><span class="status-dot"></span> RESEARCH & ENGINEERING / BEIJING</p><h1>黄胜泽<span>Shengze Huang</span></h1><p class="hero-thesis">理解智能体的行为，<br>构建能够持续改进的系统。</p><p class="hero-bio">清华大学数学与人工智能硕士研究生。<br>在元理智能负责 AutoHarness 算法与实验链路，研究评测、失败归因和运行组件优化。</p><div class="hero-links"><a class="button-primary" href="#selected">探索代表作 <span>↓</span></a><a href="resume.pdf">下载简历 ↗</a><a href="https://github.com/HuangShengZeBlueSky">GitHub ↗</a></div></div><div class="hero-map"><div class="figure-top"><span>MY RESEARCH QUESTION</span><span>01 — 03</span></div><h2>失败之后，<br>系统改变什么？</h2><div class="hero-object-tabs" role="group" aria-label="选择优化对象"><button data-object="prompt" aria-pressed="true">提示词</button><button data-object="harness" aria-pressed="false">运行组件</button><button data-object="reward" aria-pressed="false">训练奖励</button></div><div class="hero-object" data-object-panel="prompt"><span class="object-code">AutoPE</span><p>从阶段反馈中选择局部策略，<br>改写下一轮对话的提示词。</p><div class="object-track"><span>交互</span><i>→</i><span>反馈</span><i>→</i><b>策略更新</b></div><a href="projects/medical-autope.html">进入医疗预约案例 ↗</a></div><div class="hero-object" data-object-panel="harness" hidden><span class="object-code">AutoHarness</span><p>定位失败机制，选择工具、记忆<br>或执行约束中的具体修改面。</p><div class="object-track"><span>轨迹</span><i>→</i><span>归因</span><i>→</i><b>组件装配</b></div><a href="projects/autoharness.html">探索方法与插件 ↗</a></div><div class="hero-object" data-object-panel="reward" hidden><span class="object-code">RewardWeaver</span><p>从当前能力瓶颈选择过程奖励，<br>影响下一阶段强化学习。</p><div class="object-track"><span>瓶颈</span><i>→</i><span>奖励</span><i>→</i><b>参数训练</b></div><a href="projects/rewardweaver.html">阅读论文机制 ↗</a></div><p class="map-note">三个不同的优化对象，同一条反馈研究主线。</p></div></section><div class="shell credentials"><span>清华大学 <small>数学与人工智能</small></span><span>CVPR Workshops 2026 <small>RoboWM-Bench</small></span><span>State of AI Report 2026 <small>基准综述收录</small></span></div>'''
+body+='<section id="selected" class="shell home-section"><div class="section-heading"><div><p class="eyebrow">SELECTED WORK / 01</p><h2>研究问题，落在系统里。</h2></div><p>从可重复的业务实验，到模型能力的评价。<br>每项工作都有方法、实现和结果边界。</p></div><div class="selected-grid">'
+for key,tag,desc in [('autoharness','ENGINEERING / 元理智能','从“改提示词”扩展到“改运行组件”。逐例归因、方法级插件与受控回归，最终交付一个可运行的 Harness。'),('robowm-bench','RESEARCH / 共同作者','让生成视频进入机器人仿真，以真正的任务执行检验世界模型。')]:
+ body+=f'<a class="selected-work" href="projects/{key}.html"><div class="selected-art">{diagram(key,True)}</div><div class="selected-copy"><span class="eyebrow">{tag}</span><h3>{presentation[key]["short"]}<span>↗</span></h3><p>{desc}</p><span class="read-link">阅读机制、实现与实验</span></div></a>'
+body+='</div><div class="experiment-strip"><div><span class="eyebrow">CONTROLLED EXPERIMENT</span><strong>29.73% <i>→</i> 60.81%</strong><span>Telecom 训练集任务成功率</span></div><p>固定模型、任务、预算与评分器，比较提示词和工具结果插件组合。74 个任务，每题 3 次，共 222 次评测；增加 31.08 个百分点。</p><a href="projects/autoharness.html">如何得到这个结果 ↗</a></div></section>'
+body+='''<section class="shell home-section"><div class="section-heading"><div><p class="eyebrow">RESEARCH / 02</p><h2>论文与研究参与</h2></div><a class="text-link" href="learn.html?filter=research">查看研究专题 ↗</a></div><div class="publication-list">'''
+for key,date,role in [('robowm-bench','2026.05','共同作者 · CVPR Workshops'),('rewardweaver','2026.10','研究参与 · 公开预印本')]:
+ v=presentation[key];body+=f'<a class="publication" href="projects/{key}.html"><span class="pub-date">{date}</span><div><span class="item-label">{role}</span><h3>{v["short"]}</h3><p>{e(v["question"])}</p></div><span class="pub-link">精读笔记 ↗</span></a>'
+body+='</div></section>'
+body+='''<section id="engineering" class="shell home-section"><div class="section-heading"><div><p class="eyebrow">TECHNICAL ATLAS / 03</p><h2>把整条链路讲清楚。</h2></div><p>环境、测评、优化与持续实验。<br>选择一个问题，进入完整的技术专题。</p></div>'''
+body+='<div class="catalog" data-catalog><div class="catalog-controls"><div class="filter-buttons" role="group" aria-label="专题分类"><button data-filter="all" aria-pressed="true">全部专题 <small>12</small></button><button data-filter="engineering" aria-pressed="false">场景与系统</button><button data-filter="research" aria-pressed="false">研究方法</button><button data-filter="tools" aria-pressed="false">个人工具</button></div><label class="search-label"><span>⌕</span><input type="search" placeholder="搜索问题、方法或项目" aria-label="搜索专题"></label></div><div class="catalog-grid">'+''.join(catalog_item(p,i+1) for i,p in enumerate(projects))+'</div><p class="empty-state" hidden>没有匹配专题。可以换一个关键词，或选择全部专题。</p></div></section>'
+body+='<section id="tools" class="tools-band"><div class="shell"><div class="section-heading"><div><p class="eyebrow">HUMAN × AI / 04</p><h2>让反馈也服务于人的工作。</h2></div><p>一个面向知识与学习，<br>一个面向人的输入、专注与长期上下文。</p></div><div class="product-grid">'
+for key in ['educate-flywheel','echo']:
+ v=presentation[key];body+=f'<a class="product-feature" href="projects/{key}.html"><span class="eyebrow">PERSONAL PROJECT</span><h3>{v["short"]} <span>↗</span></h3><p>{e(v["question"])}</p>{diagram(key,True)}<span class="read-link">产品机制 · 数据结构 · 具体案例</span></a>'
+body+='</div></div></section>'
+body+='''<section id="about" class="shell home-section about"><div><p class="eyebrow">BACKGROUND / 05</p><h2>连接研究问题<br>与工程现场。</h2><p>我关注如何把模型行为转化为可观察、可解释、可改进的系统。研究和工程之间，实验是共同的语言。</p><div class="hero-links"><a href="mailto:1641335545@qq.com">联系我 ↗</a><a href="resume.html">完整履历 ↗</a></div></div><div class="timeline">'''
+for date,title,detail in [('2026.01—2026.10','元理智能','AutoHarness 算法负责实习生'),('2025.09—2028.06','清华大学','数学与人工智能硕士研究生 · 预计毕业'),('2025.09—2026.01','中车数研院','工业知识库、智能体与时序研究'),('2021.09—2025.06','北京航空航天大学','人工智能 · 工学学士 · 平均绩点 3.72 / 4.0')]:body+=f'<div><span>{date}</span><h3>{title}</h3><p>{detail}</p></div>'
+body+='</div></section></main>'
+(OUT/'index.html').write_text(doc('研究、系统与持续改进',body))
+# Technical reports
+related={'medical-autope':['autope','evaluation','finance-sandbox'],'finance-sandbox':['evaluation','autoharness'],'evaluation':['finance-sandbox','rewardweaver'],'autoharness':['workbench','rewardweaver'],'workbench':['autoharness','echo'],'robowm-bench':['multi-agent-benchmark','evaluation'],'rewardweaver':['autope','autoharness'],'autope':['medical-autope','rewardweaver'],'flyreview':['workbench','educate-flywheel'],'educate-flywheel':['flyreview','echo'],'echo':['workbench','educate-flywheel'],'multi-agent-benchmark':['robowm-bench','evaluation']}
 for p in projects:
-    contents=''
-    aside=''
-    total_chars=len(''.join(''.join(x.get('paragraphs',[]))+''.join(x.get('bullets',[])) for x in p['sections']))
-    minutes=max(2,round(total_chars/280))
-    for i,section in enumerate(p['sections']):
-        sid=f'section-{i+1}'
-        aside+=f'<a href="#{sid}">{e(section["heading"])}</a>'
-        contents+=f'<section id="{sid}"><h2><span>{i+1:02d}</span>{e(section["heading"])}</h2>'+render_section(section)+'</section>'
-    if p.get('surface_map'):
-        aside+='<a href="#surface-map">交互：选择修改面</a>'
-        contents+='<section id="surface-map"><h2><span>↳</span>选择一个修改面</h2><p>从失败信号出发，查看可改变的对象与插件承载方式。示例用于解释方法。</p><div class="surface-explorer"><div class="surface-buttons" role="group" aria-label="选择修改面">'
-        for i,x in enumerate(p['surface_map']): contents+=f'<button data-surface="surface-{i}" aria-pressed="{str(i==0).lower()}">{e(x["label"])}</button>'
-        contents+='</div>'
-        for i,x in enumerate(p['surface_map']):
-            contents+=f'<div class="surface-panel" id="surface-{i}"'+(' hidden' if i else '')+f'><h3>{e(x["label"])}</h3><dl><dt>失败信号</dt><dd>{e(x["signal"])}</dd><dt>修改对象</dt><dd>{e(x["change"])}</dd><dt>承载方式</dt><dd>{e(x["layer"])}</dd><dt>示例</dt><dd>{e(x["example"])}</dd></dl></div>'
-        contents+='</div></section>'
-    if p['links']: contents+='<div class="sources"><strong>论文与延伸阅读</strong>'+''.join(link(x['url'],x['label']+' ↗') for x in p['links'])+'</div>'
-    contents+='<div class="related"><h3>继续阅读</h3>'+''.join(link(x+'.html',byid[x]['title']+' ↗') for x in related.get(p['id'],[]))+'</div>'
-    body=f'''<main class="article-shell"><header class="article-header"><a class="back" href="../learn.html">← 技术专题与学习路径</a><p class="eyebrow">{e(p['kicker'])} · 约 {minutes} 分钟 · 2026.10.12</p><h1>{e(p['title'])}</h1><p class="abstract">{e(p['summary'])}</p>{tags(p)}<p class="section-sub">{e(p['role'])}</p></header><div class="article-body"><aside class="article-aside" aria-label="本页目录"><span class="toc-label">阅读目录</span>{aside}</aside><article class="article-content">{contents}</article></div></main>'''
-    (OUT/'projects'/f'{p["id"]}.html').write_text(doc(p['title'],body,'../',p['summary'],'projects/'+p['id']+'.html'),encoding='utf-8')
-
-learning=data.get('learning',{})
-learning_body='<main class="article-shell"><header class="article-header"><a class="back" href="index.html">← 返回首页</a><p class="eyebrow">FIELD NOTES / READING GUIDE</p><h1>从任务现场，理解智能体如何改进。</h1><p class="abstract">以实际工程与论文为线索，串起环境、测评、归因和优化。先理解每种方法改变什么，再看它依赖哪些反馈、如何判断有效。</p></header><article class="learning-content">'
-for section in learning.get('sections',[]):
-    learning_body+='<section><h2>'+e(section['heading'])+'</h2>'+render_section(section)+'</section>'
-for route in learning.get('routes',[]):
-    learning_body+='<section class="reading-route"><div class="eyebrow">'+e(route['label'])+'</div><h2>'+e(route['title'])+'</h2><p>'+e(route['description'])+'</p>'
-    for i,key in enumerate(route['projects']): learning_body+=row(byid[key],i+1)
-    learning_body+='</section>'
-learning_body+='</article></main>'
-(OUT/'learn.html').write_text(doc('技术专题与学习路径',learning_body,path='learn.html'),encoding='utf-8')
+ v=presentation[p['id']];sections=p['sections'];minutes=max(3,math.ceil(len(json.dumps(sections,ensure_ascii=False))/420));contents='';toc=''
+ for i,s in enumerate(sections):
+  sid='section-'+str(i+1);toc+=f'<a href="#{sid}"><span>{i+1:02d}</span>{e(s["heading"])}</a>'
+  contents+=f'<section id="{sid}"><h2><span>{i+1:02d}</span>{e(s["heading"])}</h2>{render_section(s)}</section>'
+ if p.get('surface_map'):
+  toc+='<a href="#surface-map"><span>↳</span>交互：选择修改面</a>';contents+='<section id="surface-map"><h2><span>↳</span>从失败信号选择修改面</h2><p>下面的地图展示可干预位置与承载方式。每个例子用于解释方法选择，不是自动给失败打标签的固定规则。</p><div class="surface-explorer"><div class="surface-buttons" role="group" aria-label="选择修改面">'
+  for i,x in enumerate(p['surface_map']):contents+=f'<button data-surface="surface-{i}" aria-pressed="{str(i==0).lower()}">{e(x["label"])}</button>'
+  contents+='</div>'
+  for i,x in enumerate(p['surface_map']):contents+=f'<div class="surface-panel" id="surface-{i}"'+(' hidden' if i else '')+f'><h3>{e(x["label"])}</h3><dl><dt>失败信号</dt><dd>{e(x["signal"])}</dd><dt>修改对象</dt><dd>{e(x["change"])}</dd><dt>承载方式</dt><dd>{e(x["layer"])}</dd><dt>示例</dt><dd>{e(x["example"])}</dd></dl></div>'
+  contents+='</div></section>'
+ if p['links']:contents+='<section class="sources" id="sources"><h2><span>↗</span>资料与延伸阅读</h2>'+''.join(link(x['url'],x['label']+' ↗') for x in p['links'])+'</section>'
+ contents+='<nav class="related" aria-label="相关专题"><span class="eyebrow">CONTINUE READING</span>'+''.join(f'<a href="{key}.html"><strong>{presentation[key]["short"]}</strong><span>{e(presentation[key]["question"])} ↗</span></a>' for key in related.get(p['id'],[]))+'</nav>'
+ body=f'<div class="reading-progress" aria-hidden="true"></div><main id="main" class="article-shell"><header class="article-header"><a class="back" href="../learn.html">← 专题索引</a><div class="article-kicker"><span>{e(p["kicker"])}</span><span>约 {minutes} 分钟 · 2026.10.13</span></div><h1>{e(p["title"])}</h1><p class="article-question">{e(v["question"])}</p><p class="abstract">{e(p["summary"])}</p><div class="article-meta"><p>{e(p["role"])}</p>{tags(p)}</div></header><section class="takeaways" aria-label="阅读要点"><span class="eyebrow">AT A GLANCE</span><ol>'+''.join('<li>'+e(t)+'</li>' for t in v['takeaways'])+'</ol></section>'+explorer(p)+f'<div class="article-body"><aside class="article-aside"><div class="toc-heading">本页目录 <span>{len(sections):02d} 节</span></div><nav aria-label="本页目录">{toc}</nav><a class="toc-top" href="#main">返回顶部 ↑</a></aside><article class="article-content">{contents}</article></div></main>'
+ (OUT/'projects'/f'{p["id"]}.html').write_text(doc(p['title'],body,'../',p['summary'],'projects/'+p['id']+'.html'))
+# Learning guide
+body='<main id="main" class="shell index-page"><header class="index-header"><p class="eyebrow">TECHNICAL FIELD NOTES</p><h1>专题索引</h1><p>先选择想解决的问题，再沿着环境、评价与优化往下读。</p></header><div class="catalog" data-catalog><div class="catalog-controls"><div class="filter-buttons" role="group" aria-label="专题分类"><button data-filter="all" aria-pressed="true">全部</button><button data-filter="engineering" aria-pressed="false">场景与系统</button><button data-filter="research" aria-pressed="false">研究方法</button><button data-filter="tools" aria-pressed="false">个人工具</button></div><label class="search-label"><span>⌕</span><input type="search" placeholder="搜索专题" aria-label="搜索专题"></label></div><div class="catalog-grid">'+''.join(catalog_item(p,i+1) for i,p in enumerate(projects))+'</div><p class="empty-state" hidden>没有匹配专题，请换一个关键词。</p></div><div class="reading-routes"><div class="section-heading"><div><p class="eyebrow">READING PATHS</p><h2>四条阅读路径</h2></div></div>'
+for route in data['learning']['routes']:
+ body+='<section class="route"><span class="eyebrow">'+e(route['label'])+'</span><h3>'+e(route['title'])+'</h3><p>'+e(route['description'])+'</p><ol>'+''.join('<li>'+link('projects/'+k+'.html',presentation[k]['short']+' ↗')+'</li>' for k in route['projects'])+'</ol></section>'
+body+='</div><div class="learning-content">'
+for s in data['learning']['sections']:body+='<section><h2>'+e(s['heading'])+'</h2>'+render_section(s)+'</section>'
+body+='</div></main>';(OUT/'learn.html').write_text(doc('专题索引与阅读路径',body,path='learn.html'))
 
 cv=data['resume_profile']
-resume='<div class="resume-actions"><a href="index.html">← 返回技术网站</a><div><a class="button" href="resume.pdf" download="黄胜泽-简历.pdf">下载最新 PDF ↓</a>　<a href="resume.tex">LaTeX 源码 ↓</a>　<button onclick="window.print()">打印 / 保存 PDF</button></div></div><main class="resume-sheet compact"><h1>'+e(cv['name'])+'</h1><p class="resume-contact">北京 · 1641335545@qq.com · github.com/HuangShengZeBlueSky<br>'+e(cv['direction'])+'</p><h2>教育背景</h2>'
+resume='<div class="resume-actions"><a href="index.html">← 返回技术网站</a><div><a class="button" href="resume.pdf" download="黄胜泽-简历.pdf">下载最新 PDF ↓</a>　<a href="resume.tex">LaTeX 源码 ↓</a>　<button onclick="window.print()">打印 / 保存 PDF</button></div></div><main id="main" class="resume-sheet compact"><h1>'+e(cv['name'])+'</h1><p class="resume-contact">北京 · 1641335545@qq.com · github.com/HuangShengZeBlueSky<br>'+e(cv['direction'])+'</p><h2>教育背景</h2>'
 for x in cv['education']:
     resume+=f'<div class="resume-group"><h3>{e(x["name"])}<span class="date">{e(x["date"])}</span></h3><p class="roleline">{e(x["detail"])}</p></div>'
 resume+='<h2>实习经历</h2>'
