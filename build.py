@@ -52,7 +52,7 @@ for date,title,desc in [
 ('2025.09—2026.01','中车数研院 · 智能体实习生','工业知识库与 Agentic RAG、多模型部署、工业智能体和时序异常检测。'),
 ('2024.07—2024.09','中电太极计算机研究所 · 自然语言处理研究实习生','光学字符识别与大语言模型结合的文档信息抽取流水线。')]:
     body+=f'<div class="timeline-row"><span class="timeline-time">{date}</span><div><h3>{title}</h3><p>{desc}</p></div></div>'
-body+='''</div><p class="skills"><b>技术方向</b>　智能体评测、提示词演化、强化学习、自动科研、实验基础设施<br><b>工程栈</b>　Python、SQL、TypeScript、PyTorch、Pydantic、FastAPI、SQLite、Docker、Git</p><div class="linkline"><a href="resume.html">查看完整技术履历 ↗</a><a href="resume.pdf">下载完整版简历 PDF ↓</a></div></div></section></main>'''
+body+='''</div><p class="skills"><b>技术方向</b>　智能体评测、提示词演化、强化学习、自动科研、实验基础设施<br><b>工程栈</b>　Python、SQL、TypeScript、PyTorch、Pydantic、FastAPI、SQLite、Docker、Git</p><div class="linkline"><a href="resume.html">查看完整技术履历 ↗</a><a href="resume.pdf">下载 LaTeX 版简历 PDF ↓</a></div></div></section></main>'''
 (OUT/'index.html').write_text(doc('智能体评测与自进化',body),encoding='utf-8')
 
 for p in projects:
@@ -70,7 +70,7 @@ for p in projects:
     (OUT/'projects'/f'{p["id"]}.html').write_text(doc(p['title'],body,'../',p['summary'],'projects/'+p['id']+'.html'),encoding='utf-8')
 
 resume='''<div class="resume-actions"><a href="index.html">← 返回技术网站</a><div><a href="resume.pdf">下载 PDF ↓</a>　<button onclick="window.print()">打印 / 另存为 PDF</button></div></div><main class="resume-sheet"><h1>黄胜泽</h1><p class="resume-contact">北京 · 1641335545@qq.com · github.com/HuangShengZeBlueSky<br>智能体评测与自进化 · 算法研究与工程</p><h2>教育背景</h2><h3>清华大学 · 数学与人工智能硕士研究生<span class="date">2025.09—2028.06（预计）</span></h3><h3>北京航空航天大学 · 人工智能工学学士<span class="date">2021.09—2025.06</span></h3><p>平均绩点：3.72 / 4.0</p><h2>重点实习经历</h2><h3>元理智能 · AutoHarness 算法负责实习生<span class="date">2026.01—2026.10</span></h3>'''
-for p in internships:
+for p in [byid[k] for k in ['autoharness','workbench','evaluation','finance-sandbox','medical-autope']]:
     resume+=f'<div class="no-break"><h3>{e(p["title"])}</h3><ul>'+''.join(f'<li>{e(s)}</li>' for s in p['resume'])+'</ul></div>'
 resume+='<h2>研究参与与技术项目</h2>'
 for p in research:

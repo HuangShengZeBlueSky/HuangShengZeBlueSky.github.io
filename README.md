@@ -9,10 +9,11 @@
 - `content.json`：12 个项目的内容。修改标题、摘要、技术章节、简历条目和公开参考链接。
 - `build.py`：生成首页、专题文章和网页版履历。
 - `assets/style.css`：视觉和打印样式。
-- `resume.pdf`：当前可下载的三页完整版简历。
-- `scripts/build_resume_pdf.py`：从同一份内容生成简历，使用 ReportLab；优先使用本机中文字体。
+- `resume.pdf`：当前可下载的三页 LaTeX 完整版简历。
+- `resume.tex`：可独立编译的 LaTeX 源码与排版模板。
+- `scripts/build_resume_pdf.py`：从 `content.json` 同步项目文字到 LaTeX 源码，再编译 PDF。
 
-更新简历文案后运行 `python3 -m pip install reportlab` 和 `python3 scripts/build_resume_pdf.py`，将更新后的 PDF 一起提交。
+本机安装 Tectonic 或 XeLaTeX 后，运行 `python3 scripts/build_resume_pdf.py`，将更新后的 `resume.tex` 和 PDF 一起提交。项目措辞统一修改 `content.json`，版式与教育、早期实习信息修改 `resume.tex`。
 
 本地预览：
 
