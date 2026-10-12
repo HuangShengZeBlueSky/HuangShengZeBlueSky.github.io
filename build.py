@@ -27,7 +27,7 @@ def inline(text):
 def tags(p):
     return '<div class="tags">'+''.join(f'<span class="tag">{e(t)}</span>' for t in p['tags'])+'</div>'
 def doc(title,body,prefix='',desc='黄胜泽的技术履历：Agent 评测、自进化与算法工程。',path=''):
-    return f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)} · 黄胜泽</title><meta name="description" content="{e(desc)}"><meta name="theme-color" content="#f7f5ef"><link rel="canonical" href="{SITE}/{path}"><meta property="og:title" content="{e(title)} · 黄胜泽"><meta property="og:description" content="{e(desc)}"><meta property="og:type" content="website"><link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="{prefix}assets/style.css"></head><body><header class="topbar"><nav class="shell nav" aria-label="主导航"><a class="brand" href="{prefix}index.html">黄胜泽 <small>SHENGZE HUANG</small></a><div class="nav-links"><a href="{prefix}index.html#engineering">工程</a><a href="{prefix}index.html#research">研究</a><a class="hide-mobile" href="{prefix}learn.html">学习路径</a><a class="button" href="{prefix}resume.html">精简履历 ↗</a></div></nav></header>{body}<footer class="shell footer"><span>黄胜泽 · Agent Systems &amp; Self-Evolution</span><span>更新于 2026.10 · {link('https://github.com/HuangShengZeBlueSky/HuangShengZeBlueSky.github.io','网站源码')} · {link('mailto:1641335545@qq.com','联系我')}</span></footer><script src="{prefix}assets/site.js" defer></script></body></html>'''
+    return f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)} · 黄胜泽</title><meta name="description" content="{e(desc)}"><meta name="theme-color" content="#f7f5ef"><link rel="canonical" href="{SITE}/{path}"><meta property="og:title" content="{e(title)} · 黄胜泽"><meta property="og:description" content="{e(desc)}"><meta property="og:type" content="website"><link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="{prefix}assets/style.css"></head><body><header class="topbar"><nav class="shell nav" aria-label="主导航"><a class="brand" href="{prefix}index.html">黄胜泽 <small>SHENGZE HUANG</small></a><div class="nav-links"><a href="{prefix}index.html#engineering">工程</a><a href="{prefix}index.html#research">研究</a><a class="hide-mobile" href="{prefix}learn.html">学习路径</a><a class="button" href="{prefix}resume.html">技术履历 ↗</a></div></nav></header>{body}<footer class="shell footer"><span>黄胜泽 · Agent Systems &amp; Self-Evolution</span><span>更新于 2026.10 · {link('https://github.com/HuangShengZeBlueSky/HuangShengZeBlueSky.github.io','网站源码')} · {link('mailto:1641335545@qq.com','联系我')}</span></footer><script src="{prefix}assets/site.js" defer></script></body></html>'''
 
 def row(p,i):
     return f'''<a class="project-row" href="{project_url(p)}"><span class="project-no">{i:02d}</span><div><h3>{e(p['title'])}</h3><p>{e(p['summary'])}</p>{tags(p)}</div><span class="arrow" aria-hidden="true">↗</span></a>'''
@@ -60,7 +60,7 @@ for date,title,desc in [
 ('2025.09—2026.01','中车数研院 · 智能体实习生','工业知识库与 Agentic RAG、多模型部署、工业智能体和时序异常检测。'),
 ('2024.07—2024.09','中电太极计算机研究所 · 自然语言处理研究实习生','光学字符识别与大语言模型结合的文档信息抽取流水线。')]:
     body+=f'<div class="timeline-row"><span class="timeline-time">{date}</span><div><h3>{title}</h3><p>{desc}</p></div></div>'
-body+='''</div><p class="skills"><b>技术方向</b>　智能体评测、提示词演化、强化学习、自动科研、实验基础设施<br><b>工程栈</b>　Python、SQL、TypeScript、PyTorch、Pydantic、FastAPI、SQLite、Docker、Git</p><div class="linkline"><a href="resume.html">查看精简技术履历 ↗</a><a href="learn.html">进入技术专题学习路径 ↗</a></div></div></section></main>'''
+body+='''</div><p class="skills"><b>技术方向</b>　智能体评测、提示词演化、强化学习、自动科研、实验基础设施<br><b>工程栈</b>　Python、SQL、TypeScript、PyTorch、Pydantic、FastAPI、SQLite、Docker、Git</p><div class="linkline"><a href="resume.html">查看技术履历 ↗</a><a href="learn.html">进入技术专题学习路径 ↗</a></div></div></section></main>'''
 (OUT/'index.html').write_text(doc('智能体评测与自进化',body),encoding='utf-8')
 
 def render_section(section):
@@ -124,7 +124,7 @@ learning_body+='</article></main>'
 (OUT/'learn.html').write_text(doc('技术专题与学习路径',learning_body,path='learn.html'),encoding='utf-8')
 
 cv=data['resume_profile']
-resume='<div class="resume-actions"><a href="index.html">← 返回技术网站</a><div><a href="resume.tex">LaTeX 源码 ↓</a>　<button onclick="window.print()">打印 / 保存 PDF</button></div></div><main class="resume-sheet compact"><h1>'+e(cv['name'])+'</h1><p class="resume-contact">北京 · 1641335545@qq.com · github.com/HuangShengZeBlueSky<br>'+e(cv['direction'])+'</p><h2>教育背景</h2>'
+resume='<div class="resume-actions"><a href="index.html">← 返回技术网站</a><div><a class="button" href="resume.pdf" download="黄胜泽-简历.pdf">下载最新 PDF ↓</a>　<a href="resume.tex">LaTeX 源码 ↓</a>　<button onclick="window.print()">打印 / 保存 PDF</button></div></div><main class="resume-sheet compact"><h1>'+e(cv['name'])+'</h1><p class="resume-contact">北京 · 1641335545@qq.com · github.com/HuangShengZeBlueSky<br>'+e(cv['direction'])+'</p><h2>教育背景</h2>'
 for x in cv['education']:
     resume+=f'<div class="resume-group"><h3>{e(x["name"])}<span class="date">{e(x["date"])}</span></h3><p class="roleline">{e(x["detail"])}</p></div>'
 resume+='<h2>实习经历</h2>'
@@ -138,14 +138,20 @@ for x in cv['research']:
 resume+='<h2>研究工程与个人项目</h2>'
 for x in cv['projects']:
     resume+=f'<div class="resume-group"><p><strong>{link("projects/"+x["id"]+".html",x["name"])}：</strong>{e(x["text"])}</p></div>'
+resume+='<h2>核心方法图解</h2>'
+for figure in cv['figures']:
+    resume+='<figure class="cv-figure"><h3>'+e(figure['title'])+'</h3><div class="cv-flow">'
+    for title,body in figure['nodes']:
+        resume+='<div><strong>'+e(title)+'</strong><p>'+e(body)+'</p></div>'
+    resume+='</div><figcaption>'+e(figure['caption'])+'</figcaption></figure>'
 resume+='<h2>专业技能</h2>'
 for x in cv['skills']: resume+=f'<p><strong>{e(x["label"])}：</strong>{e(x["text"])}</p>'
 resume+='</main>'
-(OUT/'resume.html').write_text(doc('精简技术履历',resume,path='resume.html'),encoding='utf-8')
+(OUT/'resume.html').write_text(doc('技术履历',resume,path='resume.html'),encoding='utf-8')
 if (ROOT/'resume.tex').exists(): shutil.copy2(ROOT/'resume.tex',OUT/'resume.tex')
-# Keep historical PDF URLs working; the current resume uses the HTML and editable source above.
+# Publish the PDF exported from the same current LaTeX source.
 if (ROOT/'resume.pdf').exists(): shutil.copy2(ROOT/'resume.pdf',OUT/'resume.pdf')
 (OUT/'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: '+SITE+'/sitemap.xml\n')
 urls=['','resume.html','learn.html']+['projects/'+p['id']+'.html' for p in projects]
 (OUT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join('<url><loc>'+SITE+'/'+u+'</loc></url>' for u in urls)+'</urlset>')
-print(f'Built {len(projects)} technical reports, reading guide and concise resume.')
+print(f'Built {len(projects)} technical reports, reading guide and illustrated resume.')
