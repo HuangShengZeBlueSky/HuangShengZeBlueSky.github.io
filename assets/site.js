@@ -2,6 +2,18 @@ function activate(buttons,button,panels,matches){
  buttons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
  panels.forEach(p=>p.hidden=!matches(p));
 }
+document.querySelectorAll('[data-secant]').forEach(root=>{
+ const slider=root.querySelector('[data-secant-slider]'),line=root.querySelector('[data-secant-line]'),point=root.querySelector('[data-secant-point]'),output=root.querySelector('[data-secant-output]');
+ function draw(){
+  const h=Number(slider.value),slope=2+h;
+  point.setAttribute('cx',String(50+210*(1+h)));
+  point.setAttribute('cy',String(290-36*(1+h)**2));
+  line.setAttribute('y1',String(290-36*(slope*(0.5-1)+1)));
+  line.setAttribute('y2',String(290-36*(slope*(2.4-1)+1)));
+  output.textContent=`h = ${h.toFixed(2)}；割线斜率 = ${slope.toFixed(2)}；切线斜率 = 2`;
+ }
+ slider.addEventListener('input',draw);draw();
+});
 document.querySelectorAll('.surface-explorer').forEach(root=>{
  const buttons=[...root.querySelectorAll('[data-surface]')];
  buttons.forEach(b=>b.addEventListener('click',()=>activate(buttons,b,root.querySelectorAll('.surface-panel'),p=>p.id===b.dataset.surface)));
