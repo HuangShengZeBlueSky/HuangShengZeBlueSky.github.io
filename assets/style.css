@@ -8,3 +8,14 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}@media print{@page{size:A4;margin:15mm}body{background:white;color:#111}.topbar,.footer,.resume-actions,.article-aside,.reading-progress,.back,.skip,.step-buttons{display:none}.resume-sheet{margin:0;padding:0;border:0;max-width:none}.resume-sheet h1{font-size:26px}.resume-sheet h2{font-size:16px;break-after:avoid;margin-top:20px}.resume-sheet h3{font-size:13px;break-after:avoid}.resume-sheet p,.resume-sheet li{font-size:10px;line-height:1.7}.resume-sheet .date{font-size:10px}.cv-figure,.method-figure{break-inside:avoid}.article-shell{padding:0;max-width:none}.article-body{display:block}.article-header{padding-top:0}.article-header h1{font-size:30px}.article-content{max-width:none}.article-content p,.article-content li{font-size:11px}.article-content h2{font-size:20px;break-after:avoid}.article-content>section{margin-bottom:25px}.table-scroll{overflow:visible}.table-scroll table{font-size:10px;min-width:0}.related{display:none}.code-block pre{white-space:pre-wrap}.surface-panel[hidden]{display:block!important}}
 
 .diagram-scroll{max-width:100%;overflow-x:auto;scrollbar-width:thin}.diagram-scroll>.architecture{max-width:850px;margin:auto}@media(max-width:700px){.method-figure .diagram-scroll>.architecture{min-width:640px}.method-figure .diagram-scroll:after{content:"左右滑动查看完整图解 →";font-size:10px;color:var(--muted);display:block;margin:6px 4px 13px;position:sticky;left:4px}.method-figure .diagram-scroll{margin-top:10px}}
+
+/* Public project directory */
+.repository-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.repository-grid .repository-card{display:flex;flex-direction:column;align-items:stretch;gap:0;min-width:0;padding:25px;background:var(--white);border:1px solid var(--line)}
+.repository-grid .repository-card h3{font:600 21px/1.5 var(--serif);margin:12px 0}
+.repository-grid .repository-card p{font-size:13px;color:var(--muted);margin:0 0 18px;line-height:1.85}
+.repository-name{display:block;margin-top:auto;font:10px/1.6 var(--mono);color:var(--muted);overflow-wrap:anywhere}
+.repository-links{display:flex;flex-wrap:wrap;gap:20px;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--accent)}
+.repository-note{margin-top:24px;font-size:12px;color:var(--muted)}
+@media(max-width:1000px){.repository-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.repository-grid{grid-template-columns:1fr}.repository-grid .repository-card{padding:22px}.nav-links{gap:15px}.nav-resume{padding-left:15px}}

@@ -1,0 +1,112 @@
+[
+  {
+    "category": "evaluation",
+    "repo": "tau2-benchmark-audit",
+    "title": "τ²-Bench 基准审计",
+    "summary": "从任务、用户模拟器、环境和评分器追踪失败原因，整理四个案例及上游反馈。",
+    "kind": "交互专题",
+    "website": "https://huangshengzebluesky.github.io/tau2-benchmark-audit/"
+  },
+  {
+    "category": "evaluation",
+    "repo": "tau2-qwen-case-audit",
+    "title": "Qwen 轨迹审计",
+    "summary": "整理 36 条 τ²-Bench 交互轨迹，支持逐案例检查模型行为与评测结果。",
+    "kind": "轨迹分析"
+  },
+  {
+    "category": "evaluation",
+    "repo": "tau2-deepseek-case-audit",
+    "title": "DeepSeek 轨迹审计",
+    "summary": "围绕 DeepSeek 用户模拟器与裁判，组织 τ²-Bench 轨迹的交互审计。",
+    "kind": "轨迹分析"
+  },
+  {
+    "category": "evaluation",
+    "repo": "MPE_muiltiagent_benchmark",
+    "title": "多智能体协作评测",
+    "summary": "连接语言模型与九种 MPE 环境，记录观测、动作及协作过程。",
+    "kind": "环境与评测",
+    "website": "https://huangshengzebluesky.github.io/MPE_muiltiagent_benchmark/"
+  },
+  {
+    "category": "evaluation",
+    "repo": "llm_GoogleFootball",
+    "title": "语言模型足球智能体",
+    "summary": "将球场状态转成文本观测，让模型决策进入 Google Research Football，并保留比赛日志。",
+    "kind": "环境与评测",
+    "website": "https://huangshengzebluesky.github.io/llm_GoogleFootball/"
+  },
+  {
+    "category": "automation",
+    "repo": "MLP_AutoResearch",
+    "title": "MLP 自动实验",
+    "summary": "基于 Karpathy AutoResearch 思路的教学项目：固定 MNIST 与训练预算，让智能体修改、训练和比较模型。",
+    "kind": "自动实验"
+  },
+  {
+    "category": "automation",
+    "repo": "feishu_agent",
+    "title": "飞书项目上下文管家",
+    "summary": "连接飞书多维表格，整理会议行动项、决策和风险，生成会前卡片与周报洞察。",
+    "kind": "协作工具"
+  },
+  {
+    "category": "learning",
+    "repo": "llm_interview_auto_fetch",
+    "title": "大模型面试与论文知识库",
+    "summary": "将截图、文本和论文整理为结构化解析、课程笔记与可浏览的知识站点。",
+    "kind": "知识流水线",
+    "website": "https://huangshengzebluesky.github.io/llm_interview_auto_fetch/"
+  },
+  {
+    "category": "learning",
+    "repo": "GPT2_pretrain_ft_eval",
+    "title": "GPT-2 训练与下游任务",
+    "summary": "教学型模型实现，涵盖预训练、释义识别、情感分类与诗歌生成。",
+    "kind": "模型训练"
+  },
+  {
+    "category": "learning",
+    "repo": "NLU_FinalProject_nanochat",
+    "title": "nanochat 课程学习",
+    "summary": "基于 Karpathy nanochat 的课程项目仓库，围绕分词、训练、评测和对话服务学习完整链路。",
+    "kind": "基于开源框架"
+  },
+  {
+    "category": "learning",
+    "repo": "google_agent_whitepaper_notebook",
+    "title": "Google 智能体白皮书笔记",
+    "summary": "个人技术解读：架构、工具协议、上下文与记忆、评估和多智能体协作。",
+    "kind": "阅读笔记"
+  },
+  {
+    "category": "learning",
+    "repo": "AI_Course_Management",
+    "title": "人工智能项目课程",
+    "summary": "按项目组织课程路线、学习资料、每周安排与备课进度。",
+    "kind": "教学实践"
+  },
+  {
+    "category": "applications",
+    "repo": "Wechat_Weather",
+    "title": "微信每日天气",
+    "summary": "多城市天气、模型生成点评与早晚安消息，组合成自动化微信推送。",
+    "kind": "生活应用",
+    "website": "https://huangshengzebluesky.github.io/Wechat_Weather/"
+  },
+  {
+    "category": "applications",
+    "repo": "photo_memory_text",
+    "title": "云端纪念册",
+    "summary": "基于网页与对象存储的轻量纪念册，包含照片瀑布流、留言和点赞。",
+    "kind": "个人应用"
+  },
+  {
+    "category": "applications",
+    "repo": "beijing-memory",
+    "title": "北京记忆地图",
+    "summary": "把照片与留言放在地图上，探索地点记录、延时送达与实时同步。",
+    "kind": "个人应用"
+  }
+]
