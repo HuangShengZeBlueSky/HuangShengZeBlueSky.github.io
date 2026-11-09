@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="把合作与通信变成可执行的测量">
+<style>text{font-family:"Arial Unicode MS","PingFang SC","Microsoft YaHei",sans-serif}</style>
+<rect x="0" y="0" width="1200" height="700" rx="12" fill="#FFFFFF" stroke="none"/>
+<text x="28" y="39" font-size="28" fill="#172D39">把合作与通信变成可执行的测量</text>
+<text x="28" y="73" font-size="19" fill="#526773">两类环境共享模型—环境适配思路；区分分布式通信与球场中的单球员战术决策</text>
+<rect x="28" y="135" width="350" height="142" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="46" y="168" font-size="23" fill="#172D39">MPE 局部观测</text>
+<text x="46" y="200" font-size="19" fill="#526773">每个角色看到各自的信息</text>
+<text x="46" y="227" font-size="19" fill="#526773">Speaker 传信息，Listener 行动</text>
+<polyline points="378,206 425,206" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="425,206 415.0950818741206,210.78462087522354 415.0950818741206,201.21537912477646" fill="#526773"/>
+<rect x="425" y="135" width="350" height="142" rx="10" fill="#EAF4F0" stroke="#D5DFE3"/>
+<text x="443" y="168" font-size="23" fill="#172D39">模型接口与角色规则</text>
+<text x="443" y="200" font-size="19" fill="#526773">观测转文字，模型输出动作</text>
+<text x="443" y="227" font-size="19" fill="#526773">通信信号 / 移动向量交给环境</text>
+<polyline points="775,206 822,206" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="822,206 812.0950818741205,210.78462087522354 812.0950818741205,201.21537912477646" fill="#526773"/>
+<rect x="822" y="135" width="350" height="142" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="840" y="168" font-size="23" fill="#172D39">多角色共同执行</text>
+<text x="840" y="200" font-size="19" fill="#526773">并行提交各角色动作</text>
+<text x="840" y="227" font-size="19" fill="#526773">环境更新位置、通信和回报</text>
+<rect x="28" y="330" width="350" height="142" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="46" y="363" font-size="23" fill="#172D39">足球局势观测</text>
+<text x="46" y="395" font-size="19" fill="#526773">坐标、球权、队友与防守者</text>
+<text x="46" y="422" font-size="19" fill="#526773">当前配置：模型控制一名球员</text>
+<polyline points="378,401 425,401" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="425,401 415.0950818741206,405.78462087522354 415.0950818741206,396.21537912477646" fill="#526773"/>
+<rect x="425" y="330" width="350" height="142" rx="10" fill="#EAF4F0" stroke="#D5DFE3"/>
+<text x="443" y="363" font-size="23" fill="#172D39">战术决策与动作解析</text>
+<text x="443" y="395" font-size="19" fill="#526773">文字局势 → 模型决策</text>
+<text x="443" y="422" font-size="19" fill="#526773">解析为方向、传球、射门等动作</text>
+<polyline points="775,401 822,401" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="822,401 812.0950818741205,405.78462087522354 812.0950818741205,396.21537912477646" fill="#526773"/>
+<rect x="822" y="330" width="350" height="142" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="840" y="363" font-size="23" fill="#172D39">记录与比较</text>
+<text x="840" y="395" font-size="19" fill="#526773">胜率、分角色回报与波动</text>
+<text x="840" y="422" font-size="19" fill="#526773">延迟、动作解析和视频回放</text>
+<polyline points="997,277 997,309 203,309 203,330" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="203,330 198.21537912477646,320.0950818741206 207.78462087522354,320.0950818741206" fill="#526773"/>
+<rect x="28" y="555" width="1144" height="107" rx="12" fill="#EBF2F9" stroke="#D5DFE3"/>
+<text x="49" y="590" font-size="23" fill="#275F91">研究问题：个体能力能否转成团队合作？</text>
+<text x="49" y="624" font-size="19" fill="#526773">已有结果：不同任务和角色下，模型能力排名与策略表现存在差异。</text>
+</svg>

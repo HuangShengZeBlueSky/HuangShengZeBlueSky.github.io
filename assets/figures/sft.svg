@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="把失败变成可训练的交互示范">
+<style>text{font-family:"Arial Unicode MS","PingFang SC","Microsoft YaHei",sans-serif}</style>
+<rect x="0" y="0" width="1200" height="700" rx="12" fill="#FFFFFF" stroke="none"/>
+<text x="28" y="39" font-size="28" fill="#172D39">把失败变成可训练的交互示范</text>
+<text x="28" y="73" font-size="19" fill="#526773">关键区别：监督目标包括工具调用；历史和工具回执是动作发生时的上下文</text>
+<rect x="28" y="112" width="350" height="144" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="46" y="145" font-size="23" fill="#172D39">01  测评与归因</text>
+<text x="46" y="177" font-size="19" fill="#526773">重放固定输入，检查失败</text>
+<text x="46" y="204" font-size="19" fill="#526773">区分模型、环境与判官问题</text>
+<rect x="425" y="112" width="350" height="144" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="443" y="145" font-size="23" fill="#172D39">02  确定补强目标</text>
+<text x="443" y="177" font-size="19" fill="#526773">例：客户坚持约过，当前未约</text>
+<text x="443" y="204" font-size="19" fill="#526773">列触发条件、成功检查与变体</text>
+<rect x="822" y="112" width="350" height="144" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="840" y="145" font-size="23" fill="#172D39">03  准备客户与世界</text>
+<text x="840" y="177" font-size="19" fill="#526773">从 Buyer 库匹配真实条件</text>
+<text x="840" y="204" font-size="19" fill="#526773">生成剧本及对应业务初态</text>
+<rect x="822" y="306" width="350" height="144" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="840" y="339" font-size="23" fill="#172D39">04  运行教师与筛选</text>
+<text x="840" y="371" font-size="19" fill="#526773">教师与客户在沙箱中交互</text>
+<text x="840" y="398" font-size="19" fill="#526773">保留合格会话和目标调用</text>
+<rect x="425" y="306" width="350" height="144" rx="10" fill="#EAF4F0" stroke="#D5DFE3"/>
+<text x="443" y="339" font-size="23" fill="#172D39">05  组织 Agent SFT 样本</text>
+<text x="443" y="371" font-size="19" fill="#526773">输入：历史 + 工具定义 / 回执</text>
+<text x="443" y="398" font-size="19" fill="#526773">目标：回复或工具调用</text>
+<rect x="28" y="306" width="350" height="144" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="46" y="339" font-size="23" fill="#172D39">06  训练、部署与复评</text>
+<text x="46" y="371" font-size="19" fill="#526773">与旧数据组合做监督微调</text>
+<text x="46" y="398" font-size="19" fill="#526773">用原评测协议决定是否采用</text>
+<polyline points="378,184 425,184" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="425,184 415.0950818741206,188.78462087522354 415.0950818741206,179.21537912477646" fill="#526773"/>
+<polyline points="775,184 822,184" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="822,184 812.0950818741205,188.78462087522354 812.0950818741205,179.21537912477646" fill="#526773"/>
+<polyline points="997,256 997,306" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="997,306 992.2153791247765,296.0950818741206 1001.7846208752235,296.0950818741206" fill="#526773"/>
+<polyline points="822,378 775,378" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="775,378 784.9049181258795,373.21537912477646 784.9049181258795,382.78462087522354" fill="#526773"/>
+<polyline points="425,378 378,378" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="378,378 387.9049181258794,373.21537912477646 387.9049181258794,382.78462087522354" fill="#526773"/>
+<rect x="28" y="488" width="1144" height="149" rx="12" fill="#EBF2F9" stroke="#D5DFE3"/>
+<text x="50" y="525" font-size="23" fill="#275F91">一条训练样本保留“当时看到什么”与“应该采取什么动作”</text>
+<text x="50" y="562" font-size="21" fill="#172D39">已发生的上下文</text>
+<text x="50" y="593" font-size="18" fill="#526773">用户确认分院、工具查到可约</text>
+<text x="433" y="562" font-size="21" fill="#172D39">目标模型调用</text>
+<text x="433" y="593" font-size="18" fill="#526773">调用预约工具，或给出正确回复</text>
+<text x="816" y="562" font-size="21" fill="#172D39">训练监督</text>
+<text x="816" y="593" font-size="18" fill="#526773">此前上下文不计损失</text>
+<text x="816" y="618" font-size="18" fill="#526773">当前目标 assistant 输出计损失</text>
+<polyline points="373,576 407,576" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="407,576 397.0950818741206,580.7846208752235 397.0950818741206,571.2153791247765" fill="#526773"/>
+<polyline points="763,576 796,576" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="796,576 786.0950818741205,580.7846208752235 786.0950818741205,571.2153791247765" fill="#526773"/>
+<text x="28" y="675" font-size="20" fill="#267765">运行锚点：美年第二轮训练与复评完成；86.35% → 87.67% 为循环内指标。</text>
+</svg>

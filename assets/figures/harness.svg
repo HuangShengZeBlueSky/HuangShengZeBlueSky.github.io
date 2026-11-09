@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="扩大修改面，让归因落成可执行机制">
+<style>text{font-family:"Arial Unicode MS","PingFang SC","Microsoft YaHei",sans-serif}</style>
+<rect x="0" y="0" width="1200" height="700" rx="12" fill="#FFFFFF" stroke="none"/>
+<text x="28" y="39" font-size="28" fill="#172D39">扩大修改面，让归因落成可执行机制</text>
+<text x="28" y="73" font-size="19" fill="#526773">固定做事模型权重；DeepSeek Harness 提供运行接口，外部优化器负责改代码与选版本</text>
+<rect x="28" y="112" width="350" height="133" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="46" y="145" font-size="23" fill="#172D39">A  提示与技能</text>
+<text x="46" y="177" font-size="19" fill="#526773">修改指令和操作步骤</text>
+<text x="46" y="204" font-size="19" fill="#526773">运行结构保持固定</text>
+<rect x="425" y="112" width="350" height="133" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="443" y="145" font-size="23" fill="#172D39">B  独立插件</text>
+<text x="443" y="177" font-size="19" fill="#526773">增加记忆、动作检查</text>
+<text x="443" y="204" font-size="19" fill="#526773">或工具回执处理</text>
+<rect x="822" y="112" width="350" height="133" rx="10" fill="#EBF2F9" stroke="#D5DFE3"/>
+<text x="840" y="145" font-size="23" fill="#172D39">C  协同机制</text>
+<text x="840" y="177" font-size="19" fill="#526773">共享状态跨钩子使用</text>
+<text x="840" y="204" font-size="19" fill="#526773">组合上下文与执行控制</text>
+<polyline points="378,180 425,180" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="425,180 415.0950818741206,184.78462087522354 415.0950818741206,175.21537912477646" fill="#526773"/>
+<polyline points="775,180 822,180" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="822,180 812.0950818741205,184.78462087522354 812.0950818741205,175.21537912477646" fill="#526773"/>
+<rect x="28" y="277" width="1144" height="231" rx="12" fill="#EAF4F0" stroke="#D5DFE3"/>
+<text x="50" y="312" font-size="22" fill="#267765">机制示意：同一条可信事实，同时改变模型下一步输入与动作前提</text>
+<rect x="50" y="338" width="292" height="136" rx="10" fill="#FFFFFF" stroke="#D5DFE3"/>
+<text x="68" y="371" font-size="23" fill="#172D39">工具执行后</text>
+<text x="68" y="403" font-size="19" fill="#526773">tools/post-execute</text>
+<text x="68" y="430" font-size="19" fill="#526773">从真实回执更新任务状态</text>
+<rect x="410" y="338" width="324" height="136" rx="10" fill="#FFFFFF" stroke="#D5DFE3"/>
+<text x="428" y="371" font-size="23" fill="#172D39">本场共享状态</text>
+<text x="428" y="403" font-size="19" fill="#526773">例：已查询可约，尚未预约</text>
+<text x="428" y="430" font-size="19" fill="#526773">只保存本场观察到的事实</text>
+<rect x="802" y="333" width="344" height="68" rx="10" fill="#FFFFFF" stroke="#D5DFE3"/>
+<text x="820" y="366" font-size="23" fill="#172D39">思考前：组装当前上下文</text>
+<rect x="802" y="416" width="344" height="68" rx="10" fill="#FFFFFF" stroke="#D5DFE3"/>
+<text x="820" y="449" font-size="23" fill="#172D39">执行前：检查动作前提</text>
+<polyline points="342,407 410,407" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="410,407 400.0950818741206,411.78462087522354 400.0950818741206,402.21537912477646" fill="#526773"/>
+<polyline points="734,387 767,387 767,367 802,367" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="802,367 792.0950818741205,371.78462087522354 792.0950818741205,362.21537912477646" fill="#526773"/>
+<polyline points="734,429 767,429 767,450 802,450" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="802,450 792.0950818741205,454.78462087522354 792.0950818741205,445.21537912477646" fill="#526773"/>
+<rect x="28" y="552" width="250" height="96" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="46" y="585" font-size="23" fill="#172D39">轨迹归因</text>
+<text x="46" y="617" font-size="19" fill="#526773">定位偏差与可改位置</text>
+<polyline points="278,599 326,599" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="326,599 316.0950818741206,603.7846208752235 316.0950818741206,594.2153791247765" fill="#526773"/>
+<rect x="326" y="552" width="250" height="96" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="344" y="585" font-size="23" fill="#172D39">生成候选</text>
+<text x="344" y="617" font-size="19" fill="#526773">修改插件及组合</text>
+<polyline points="576,599 624,599" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="624,599 614.0950818741205,603.7846208752235 614.0950818741205,594.2153791247765" fill="#526773"/>
+<rect x="624" y="552" width="250" height="96" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="642" y="585" font-size="23" fill="#172D39">配对评测</text>
+<text x="642" y="617" font-size="19" fill="#526773">检查修复与退步</text>
+<polyline points="874,599 922,599" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="922,599 912.0950818741205,603.7846208752235 912.0950818741205,594.2153791247765" fill="#526773"/>
+<rect x="922" y="552" width="250" height="96" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="940" y="585" font-size="23" fill="#172D39">选择与反馈</text>
+<text x="940" y="617" font-size="19" fill="#526773">采用或保留父版</text>
+<text x="28" y="682" font-size="19" fill="#526773">修改空间更大，代表可表达的机制更多；能否找到好机制，还取决于优化器和预算。</text>
+</svg>

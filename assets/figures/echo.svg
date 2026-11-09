@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="以自己说过的话找回思路与专注">
+<style>text{font-family:"Arial Unicode MS","PingFang SC","Microsoft YaHei",sans-serif}</style>
+<rect x="0" y="0" width="1200" height="700" rx="12" fill="#FFFFFF" stroke="none"/>
+<text x="28" y="39" font-size="28" fill="#172D39">以自己说过的话找回思路与专注</text>
+<text x="28" y="73" font-size="19" fill="#526773">项目是来源；主题是当前目标；对话是承载相关讨论的上下文</text>
+<rect x="28" y="135" width="350" height="142" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="46" y="168" font-size="23" fill="#172D39">原始会话进入日志</text>
+<text x="46" y="200" font-size="19" fill="#526773">Codex 授权读取 / 历史导入</text>
+<text x="46" y="227" font-size="19" fill="#526773">保存本人原话及 AI 回答</text>
+<polyline points="378,206 425,206" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="425,206 415.0950818741206,210.78462087522354 415.0950818741206,201.21537912477646" fill="#526773"/>
+<rect x="425" y="135" width="350" height="142" rx="10" fill="#EAF4F0" stroke="#D5DFE3"/>
+<text x="443" y="168" font-size="23" fill="#172D39">按本人输入组织阅读</text>
+<text x="443" y="200" font-size="19" fill="#526773">先看自己问了什么、如何变化</text>
+<text x="443" y="227" font-size="19" fill="#526773">需要背景时再展开模型回复</text>
+<polyline points="775,206 822,206" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="822,206 812.0950818741205,210.78462087522354 812.0950818741205,201.21537912477646" fill="#526773"/>
+<rect x="822" y="135" width="350" height="142" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="840" y="168" font-size="23" fill="#172D39">关联个人主题</text>
+<text x="840" y="200" font-size="19" fill="#526773">从多个项目选择相关会话</text>
+<text x="840" y="227" font-size="19" fill="#526773">如：今天把简历讲清楚</text>
+<rect x="28" y="330" width="350" height="142" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="46" y="363" font-size="23" fill="#172D39">进入专注区</text>
+<text x="46" y="395" font-size="19" fill="#526773">围绕当前主线继续一件事</text>
+<text x="46" y="422" font-size="19" fill="#526773">减少跨主题翻找与分散</text>
+<polyline points="378,401 425,401" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="425,401 415.0950818741206,405.78462087522354 415.0950818741206,396.21537912477646" fill="#526773"/>
+<rect x="425" y="330" width="350" height="142" rx="10" fill="#EAF4F0" stroke="#D5DFE3"/>
+<text x="443" y="363" font-size="23" fill="#172D39">本人复盘与按需摘要</text>
+<text x="443" y="395" font-size="19" fill="#526773">写下理解、决定和接续位置</text>
+<text x="443" y="422" font-size="19" fill="#526773">原文、AI 摘要、本人复盘分开</text>
+<polyline points="775,401 822,401" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="822,401 812.0950818741205,405.78462087522354 812.0950818741205,396.21537912477646" fill="#526773"/>
+<rect x="822" y="330" width="350" height="142" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="840" y="363" font-size="23" fill="#172D39">归档与接续</text>
+<text x="840" y="395" font-size="19" fill="#526773">SQLite 档案供网页和 MCP 共用</text>
+<text x="840" y="422" font-size="19" fill="#526773">下次从该主题和复盘继续</text>
+<polyline points="997,277 997,309 203,309 203,330" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="203,330 198.21537912477646,320.0950818741206 207.78462087522354,320.0950818741206" fill="#526773"/>
+<rect x="28" y="555" width="1144" height="107" rx="12" fill="#EBF2F9" stroke="#D5DFE3"/>
+<text x="49" y="590" font-size="23" fill="#275F91">产品目标：让人的输入成为复盘入口，让当前主题约束工作范围。</text>
+<text x="49" y="624" font-size="19" fill="#526773">已形成可运行原型与参赛材料；日主题关系是本人最新强调的产品方向。</text>
+</svg>

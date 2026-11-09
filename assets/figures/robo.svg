@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="RoboWM-Bench：从预测视频走到物理执行">
+<style>text{font-family:"Arial Unicode MS","PingFang SC","Microsoft YaHei",sans-serif}</style>
+<rect x="0" y="0" width="1200" height="700" rx="12" fill="#FFFFFF" stroke="none"/>
+<text x="28" y="39" font-size="28" fill="#172D39">RoboWM-Bench：从预测视频走到物理执行</text>
+<text x="28" y="73" font-size="19" fill="#526773">统一初态与任务；分开检查世界模型、动作恢复和仿真执行的误差</text>
+<rect x="28" y="114" width="270" height="131" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="46" y="147" font-size="23" fill="#172D39">初始观测 + 任务</text>
+<text x="46" y="179" font-size="19" fill="#526773">例如：把杯子放到盘子上</text>
+<text x="46" y="206" font-size="19" fill="#526773">真实场景或原生仿真</text>
+<rect x="357" y="114" width="270" height="131" rx="10" fill="#EBF2F9" stroke="#D5DFE3"/>
+<text x="375" y="147" font-size="23" fill="#172D39">视频世界模型</text>
+<text x="375" y="179" font-size="19" fill="#526773">生成未来操作视频</text>
+<text x="375" y="206" font-size="19" fill="#526773">得到预测的人手 / 机器人行为</text>
+<polyline points="298,179 357,179" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="357,179 347.0950818741206,183.78462087522354 347.0950818741206,174.21537912477646" fill="#526773"/>
+<rect x="724" y="104" width="448" height="106" rx="10" fill="#EAF4F0" stroke="#D5DFE3"/>
+<text x="742" y="137" font-size="23" fill="#172D39">人手视频 → 三维跟踪与重定向</text>
+<text x="742" y="169" font-size="19" fill="#526773">转为机器人的末端位姿与夹爪动作</text>
+<rect x="724" y="230" width="448" height="106" rx="10" fill="#EAF4F0" stroke="#D5DFE3"/>
+<text x="742" y="263" font-size="23" fill="#172D39">机器人视频 → 逆动力学模型</text>
+<text x="742" y="295" font-size="19" fill="#526773">从相邻画面恢复机器人的关节动作</text>
+<polyline points="627,163 675,163 675,157 724,157" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="724,157 714.0950818741205,161.78462087522354 714.0950818741205,152.21537912477646" fill="#526773"/>
+<polyline points="627,203 675,203 675,283 724,283" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="724,283 714.0950818741205,287.78462087522354 714.0950818741205,278.21537912477646" fill="#526773"/>
+<rect x="28" y="379" width="1144" height="136" rx="12" fill="#EBF2F9" stroke="#D5DFE3"/>
+<text x="48" y="415" font-size="24" fill="#275F91">标准仿真 / 真实场景重建世界</text>
+<text x="48" y="451" font-size="20" fill="#526773">相同场景起点，执行恢复出的动作</text>
+<text x="48" y="486" font-size="20" fill="#526773">检验接触、抓取、物体关系与任务完成</text>
+<polyline points="671,483 800,483" fill="none" stroke="#275F91" stroke-width="2"/>
+<polyline points="703,483 703,446 746,421 786,445 829,429" fill="none" stroke="#275F91" stroke-width="7"/>
+<polyline points="829,429 842,447" fill="none" stroke="#275F91" stroke-width="2"/>
+<polyline points="829,429 852,431" fill="none" stroke="#275F91" stroke-width="2"/>
+<rect x="858" y="446" width="35" height="39" rx="4" fill="#FFFFFF" stroke="#275F91"/>
+<polyline points="852,486 970,486" fill="none" stroke="#275F91" stroke-width="2"/>
+<text x="993" y="447" font-size="22" fill="#275F91">执行证据</text>
+<text x="993" y="481" font-size="19" fill="#526773">状态与回放</text>
+<polyline points="1100,336 1100,360 956,360 956,379" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="956,379 951.2153791247765,369.0950818741206 960.7846208752235,369.0950818741206" fill="#526773"/>
+<rect x="28" y="557" width="350" height="99" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="46" y="590" font-size="23" fill="#172D39">步骤级检查</text>
+<text x="46" y="622" font-size="19" fill="#526773">接触 → 抓取 → 放置</text>
+<rect x="425" y="557" width="350" height="99" rx="10" fill="#EAF4F0" stroke="#D5DFE3"/>
+<text x="443" y="590" font-size="23" fill="#172D39">任务级成功</text>
+<text x="443" y="622" font-size="19" fill="#526773">目标物体关系与最终结果</text>
+<rect x="822" y="557" width="350" height="99" rx="10" fill="#F3F6F7" stroke="#D5DFE3"/>
+<text x="840" y="590" font-size="23" fill="#172D39">接口可靠性</text>
+<text x="840" y="622" font-size="19" fill="#526773">动作恢复 / 真实与仿真一致性</text>
+<polyline points="203,515 203,557" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="203,557 198.21537912477646,547.0950818741205 207.78462087522354,547.0950818741205" fill="#526773"/>
+<polyline points="600,515 600,557" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="600,557 595.2153791247765,547.0950818741205 604.7846208752235,547.0950818741205" fill="#526773"/>
+<polyline points="997,515 997,557" fill="none" stroke="#526773" stroke-width="2"/>
+<polygon points="997,557 992.2153791247765,547.0950818741205 1001.7846208752235,547.0950818741205" fill="#526773"/>
+<text x="28" y="687" font-size="19" fill="#526773">执行评价补充视觉评价：看起来合理的预测，仍可能在接触和长时序操作中失败。</text>
+</svg>
